@@ -551,7 +551,7 @@
 
             <div class="flex items-center space-x-4 shrink-0">
                 <span class="text-xs text-slate-600 font-medium hidden">Already registered?</span>
-                <button class="px-4 py-2 text-xs font-semibold text-rose-600 hover:text-rose-700 border border-rose-200 rounded-xl hover:bg-rose-50 transition-all whitespace-nowrap">Log In</button>
+                <button id="loginBtn" onclick="bjlOpen()" class="px-4 py-2 text-xs font-semibold text-rose-600 hover:text-rose-700 border border-rose-200 rounded-xl hover:bg-rose-50 transition-all whitespace-nowrap">Log In</button>
             </div>
         </div>
 
@@ -2640,6 +2640,378 @@
             closeCheckout();
             alert(`🎉 Payment confirmation received for the ${activePlanName} plan (${durationText}). Our matchmaking advisor will verify and activate your membership shortly.`);
         }
+    </script>
+
+    <!-- ================= BandhanJodi Login (integrated from 0004.html) ================= -->
+    <style id="bjLoginStyles">
+#bjLogin{position:fixed;inset:0;z-index:60;display:none;}
+#bjLogin.open{display:block;}
+.bjl-panel{position:absolute;inset:0;display:flex;flex-direction:column;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  background:linear-gradient(110deg,#701025 0%,#500f1f 45%,#300c17 100%);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  color:#1f2937;}
+.bjl-head{width:100%;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex:0 0 auto;}
+.bjl-brand{display:flex;align-items:baseline;gap:2px;color:#fff;text-decoration:none;}
+.bjl-brand b{font-size:22px;font-weight:700;letter-spacing:-.02em;}
+.bjl-brand span{font-size:11px;font-weight:500;opacity:.8;}
+.bjl-head-right{display:flex;align-items:center;gap:10px;}
+.bjl-lang{display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;font-size:12px;font-weight:500;cursor:pointer;transition:background .2s;font-family:inherit;}
+.bjl-lang:hover{background:rgba(255,255,255,.1);}
+.bjl-close{width:34px;height:34px;border-radius:8px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;font-family:inherit;padding:0;}
+.bjl-close:hover{background:rgba(255,255,255,.12);}
+.bjl-main{flex:1 1 auto;display:flex;align-items:center;justify-content:center;padding:8px 16px 28px;}
+.bjl-card{background:#fff;border-radius:18px;box-shadow:0 25px 50px -12px rgba(0,0,0,.45);width:100%;max-width:430px;padding:32px;position:relative;overflow:hidden;}
+.bjl-alert{display:none;font-size:12px;padding:12px;border-radius:6px;margin-bottom:16px;text-align:center;font-weight:500;transition:all .3s;}
+.bjl-alert.show{display:block;}
+.bjl-alert.info{background:#dbeafe;color:#1e40af;}
+.bjl-alert.success{background:#dcfce7;color:#166534;}
+.bjl-alert.error{background:#fee2e2;color:#991b1b;}
+.bjl-alert.warn{background:#fef9c3;color:#854d0e;}
+.bjl-title{font-size:24px;font-weight:700;color:#1f2937;letter-spacing:-.01em;margin:0;line-height:1.2;}
+.bjl-sub{font-size:14px;color:#6b7280;margin:4px 0 0;}
+.bjl-heading{margin-bottom:22px;}
+.bjl-view{animation:bjlFade .25s ease-in-out forwards;}
+.bjl-hidden{display:none !important;}
+@keyframes bjlFade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.bjl-field{position:relative;margin-top:16px;}
+.bjl-input{width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid #d1d5db;border-radius:6px;font-size:14px;color:#1f2937;outline:none;transition:border-color .2s,box-shadow .2s;background:#fff;font-family:inherit;}
+.bjl-input:focus{border-color:#2563eb;box-shadow:0 0 0 1px #2563eb;}
+.bjl-input.pw{padding-right:64px;}
+.bjl-pw-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:12px;font-weight:600;color:#1e40af;cursor:pointer;font-family:inherit;}
+.bjl-pw-toggle:hover{color:#172554;}
+.bjl-row{display:flex;align-items:center;justify-content:space-between;font-size:12px;padding:10px 0 4px;gap:10px;}
+.bjl-check{display:flex;align-items:center;gap:8px;color:#4b5563;cursor:pointer;user-select:none;}
+.bjl-check input{width:16px;height:16px;accent-color:#1e40af;cursor:pointer;margin:0;}
+.bjl-link{color:#1e40af;font-weight:500;text-decoration:none;}
+.bjl-link:hover{text-decoration:underline;}
+.bjl-btn{width:100%;box-sizing:border-box;padding:13px;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;transition:background .15s,color .15s;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;margin-top:14px;}
+.bjl-btn-primary{background:#1e40af;color:#fff;box-shadow:0 1px 2px rgba(0,0,0,.08);}
+.bjl-btn-primary:hover{background:#1d399c;}
+.bjl-btn-primary:active{background:#1a3286;}
+.bjl-btn-outline{background:#fff;border:1px solid #d1d5db;color:#374151;font-weight:500;margin-top:0;}
+.bjl-btn-outline:hover{background:#f9fafb;}
+.bjl-btn-muted{background:#e5e7eb;color:#6b7280;box-shadow:0 1px 2px rgba(0,0,0,.08);}
+.bjl-btn-muted.enabled{background:#1e40af;color:#fff;}
+.bjl-divider{position:relative;margin:28px 0;display:flex;align-items:center;justify-content:center;}
+.bjl-divider::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid #e5e7eb;}
+.bjl-divider span{position:relative;background:#fff;padding:0 12px;font-size:11px;font-weight:600;color:#9ca3af;letter-spacing:.14em;}
+.bjl-mobile-row{display:flex;gap:8px;margin-top:16px;}
+.bjl-code{width:96px;position:relative;flex:0 0 auto;}
+.bjl-code .bjl-input{text-align:center;background:#f9fafb;color:#374151;font-weight:500;cursor:default;}
+.bjl-code .bjl-tag{position:absolute;top:-8px;left:12px;background:#fff;padding:0 4px;font-size:10px;color:#9ca3af;}
+.bjl-float{position:relative;flex:1 1 auto;}
+.bjl-float label{position:absolute;left:14px;top:12px;font-size:14px;color:#6b7280;transition:all .2s;pointer-events:none;background:transparent;}
+.bjl-float input:focus ~ label,
+.bjl-float input:not(:placeholder-shown) ~ label{top:-8px;left:10px;font-size:11px;color:#2563eb;background:#fff;padding:0 4px;}
+.bjl-otp-wrap{display:flex;justify-content:space-between;gap:8px;margin-top:4px;}
+.bjl-otp{flex:1 1 0;min-width:0;width:100%;max-width:52px;aspect-ratio:1/1;text-align:center;font-size:20px;font-weight:700;border:1px solid #d1d5db;border-radius:10px;outline:none;transition:border-color .2s,box-shadow .2s;padding:0;box-sizing:border-box;font-family:inherit;}
+.bjl-otp:focus{border-color:#1d4ed8;box-shadow:0 0 0 1px #1d4ed8;}
+.bjl-otp-icon{width:48px;height:48px;background:#eff6ff;color:#1d4ed8;border-radius:9999px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;}
+.bjl-center{text-align:center;}
+.bjl-small{font-size:12px;color:#6b7280;margin:4px 0 0;}
+.bjl-resend{margin-top:20px;text-align:center;font-size:12px;color:#6b7280;}
+.bjl-resend button{background:none;border:none;color:#1e40af;font-weight:600;cursor:pointer;font-family:inherit;font-size:12px;padding:0;}
+.bjl-resend button:disabled{color:#9ca3af;cursor:not-allowed;}
+.bjl-back{margin-top:16px;text-align:center;}
+.bjl-back button{background:none;border:none;color:#6b7280;font-size:12px;cursor:pointer;text-decoration:underline;font-family:inherit;padding:0;}
+.bjl-back button:hover{color:#1f2937;}
+@media (max-width:430px){
+  .bjl-card{padding:22px 18px;border-radius:16px;}
+  .bjl-head{padding:14px 16px;}
+  .bjl-brand b{font-size:20px;}
+  .bjl-otp{font-size:17px;border-radius:8px;}
+  .bjl-code{width:82px;}
+  .bjl-title{font-size:21px;}
+  .bjl-main{padding:6px 12px 22px;}
+}
+
+    </style>
+<div id="bjLogin" aria-hidden="true">
+  <div class="bjl-panel" role="dialog" aria-modal="true" aria-label="BandhanJodi login">
+    <header class="bjl-head">
+      <a href="#" class="bjl-brand" onclick="bjlClose();return false;"><b>BANDHANJODI</b><span>.com</span></a>
+      <div class="bjl-head-right">
+        <button type="button" class="bjl-lang" title="Switch language"><span>अ</span><span style="opacity:.6">/</span><span>A</span></button>
+        <button type="button" class="bjl-close" aria-label="Close login" onclick="bjlClose()">&times;</button>
+      </div>
+    </header>
+
+    <main class="bjl-main">
+      <div class="bjl-card">
+        <div id="bjl-alert" class="bjl-alert"></div>
+
+        <!-- STATE 1: Email Login -->
+        <div id="bjl-email-view" class="bjl-view">
+          <div class="bjl-heading">
+            <h2 class="bjl-title">Welcome to BandhanJodi</h2>
+            <p class="bjl-sub">Enter your email id to login</p>
+          </div>
+          <form id="bjl-email-form" onsubmit="bjlRequestOTP(event,'email')">
+            <div class="bjl-field">
+              <input type="email" id="bjl-email-input" required placeholder="Email Id" class="bjl-input">
+            </div>
+            <div class="bjl-field">
+              <input type="password" id="bjl-password-input" required placeholder="Password" class="bjl-input pw">
+              <button type="button" id="bjl-pw-toggle" class="bjl-pw-toggle" onclick="bjlTogglePassword()">Show</button>
+            </div>
+            <div class="bjl-row">
+              <label class="bjl-check"><input type="checkbox" checked><span>Keep me logged in</span></label>
+              <a href="#" class="bjl-link">Forgot Password?</a>
+            </div>
+            <button type="submit" class="bjl-btn bjl-btn-primary"><span>Login</span></button>
+          </form>
+          <div class="bjl-divider"><span>OR</span></div>
+          <button type="button" class="bjl-btn bjl-btn-outline" onclick="bjlSwitchView('mobile')">Continue with Mobile</button>
+        </div>
+
+        <!-- STATE 2: Mobile Login -->
+        <div id="bjl-mobile-view" class="bjl-view bjl-hidden">
+          <div class="bjl-heading">
+            <h2 class="bjl-title">Welcome back!</h2>
+            <p class="bjl-sub">Enter your number to login</p>
+          </div>
+          <form id="bjl-mobile-form" onsubmit="bjlRequestOTP(event,'mobile')">
+            <div class="bjl-mobile-row">
+              <div class="bjl-code">
+                <input type="text" value="+91" readonly class="bjl-input">
+                <span class="bjl-tag">Code</span>
+              </div>
+              <div class="bjl-float">
+                <input type="tel" id="bjl-mobile-input" required pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" placeholder=" " class="bjl-input">
+                <label for="bjl-mobile-input">Mobile Number</label>
+              </div>
+            </div>
+            <button type="submit" id="bjl-mobile-next" class="bjl-btn bjl-btn-muted"><span>Next</span></button>
+          </form>
+          <div class="bjl-divider"><span>OR</span></div>
+          <button type="button" class="bjl-btn bjl-btn-outline" onclick="bjlSwitchView('email')">Continue with Email</button>
+        </div>
+
+        <!-- STATE 3: OTP Verification -->
+        <div id="bjl-otp-view" class="bjl-view bjl-hidden">
+          <div class="bjl-center bjl-heading">
+            <div class="bjl-otp-icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2l7 3v6c0 4.42-2.99 8.42-7 9-4.01-.58-7-4.58-7-9V5l7-3zm0 2.18L7 6.32V11c0 3.31 2.1 6.36 5 6.93 2.9-.57 5-3.62 5-6.93V6.32l-5-2.14z"/></svg>
+            </div>
+            <h2 class="bjl-title">Enter Verification Code</h2>
+            <p class="bjl-small">We sent an OTP to <span id="bjl-target" style="font-weight:600;color:#1f2937;"></span></p>
+          </div>
+          <form id="bjl-otp-form" onsubmit="bjlVerifyOTP(event)">
+            <div class="bjl-otp-wrap" id="bjl-otp-inputs">
+              <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="bjl-otp" required>
+              <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="bjl-otp" required>
+              <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="bjl-otp" required>
+              <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="bjl-otp" required>
+              <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="bjl-otp" required>
+              <input type="text" maxlength="1" pattern="[0-9]" inputmode="numeric" class="bjl-otp" required>
+            </div>
+            <button type="submit" class="bjl-btn bjl-btn-primary"><span>Verify &amp; Proceed</span></button>
+          </form>
+          <div class="bjl-resend">Didn't receive the code? <button id="bjl-resend-btn" type="button" onclick="bjlResendOTP()" disabled>Resend Code <span id="bjl-timer">(30s)</span></button></div>
+          <div class="bjl-back"><button type="button" onclick="bjlResetViews()">&larr; Back to login options</button></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+    <script>
+(function () {
+  // ==== YOUR OTP SERVER ====
+  // This is the ONLY line you edit to go live. Point it at the server you
+  // deployed (see SETUP-GUIDE.md). It must be an https:// URL, because this
+  // page is served over https and browsers block http calls from it.
+  //   Local testing : 'http://localhost:5000/api'
+  //   Render        : 'https://your-service.onrender.com/api'
+  //   Custom domain : 'https://api.bandhanjodi.com/api'
+  var BACKEND_URL = 'https://api.bandhanjodi.com/api';
+
+  var overlay = document.getElementById('bjLogin');
+  var emailView = document.getElementById('bjl-email-view');
+  var mobileView = document.getElementById('bjl-mobile-view');
+  var otpView = document.getElementById('bjl-otp-view');
+  var passwordInput = document.getElementById('bjl-password-input');
+  var pwToggle = document.getElementById('bjl-pw-toggle');
+  var mobileInput = document.getElementById('bjl-mobile-input');
+  var mobileNextBtn = document.getElementById('bjl-mobile-next');
+  var statusAlert = document.getElementById('bjl-alert');
+  var targetDisplay = document.getElementById('bjl-target');
+  var resendBtn = document.getElementById('bjl-resend-btn');
+  var timerSpan = document.getElementById('bjl-timer');
+  var otpBoxes = document.querySelectorAll('.bjl-otp');
+
+  var currentAuthType = '';
+  var currentTargetValue = '';
+  var timerInterval = null;
+
+  function showAlert(msg, kind) {
+    statusAlert.className = 'bjl-alert show ' + (kind || 'info');
+    statusAlert.textContent = msg;
+  }
+  function hideAlert() {
+    statusAlert.className = 'bjl-alert';
+    statusAlert.textContent = '';
+  }
+
+  window.bjlSwitchView = function (targetView) {
+    hideAlert();
+    emailView.classList.add('bjl-hidden');
+    mobileView.classList.add('bjl-hidden');
+    otpView.classList.add('bjl-hidden');
+    if (targetView === 'mobile') mobileView.classList.remove('bjl-hidden');
+    if (targetView === 'email') emailView.classList.remove('bjl-hidden');
+    if (targetView === 'otp') otpView.classList.remove('bjl-hidden');
+  };
+
+  window.bjlResetViews = function () {
+    clearInterval(timerInterval);
+    window.bjlSwitchView('email');
+  };
+
+  window.bjlTogglePassword = function () {
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      pwToggle.textContent = 'Hide';
+    } else {
+      passwordInput.type = 'password';
+      pwToggle.textContent = 'Show';
+    }
+  };
+
+  window.bjlOpen = function () {
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    window.bjlSwitchView('email');
+  };
+
+  window.bjlClose = function () {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    hideAlert();
+  };
+
+  // Enable the mobile "Next" button once 10 digits are typed
+  mobileInput.addEventListener('input', function (e) {
+    if (e.target.value.trim().length >= 10) {
+      mobileNextBtn.classList.add('enabled');
+    } else {
+      mobileNextBtn.classList.remove('enabled');
+    }
+  });
+
+  // 6-digit OTP auto-focus / backspace behaviour
+  otpBoxes.forEach(function (box, index) {
+    box.addEventListener('keyup', function (e) {
+      if (e.key >= '0' && e.key <= '9') {
+        if (index < otpBoxes.length - 1) otpBoxes[index + 1].focus();
+      } else if (e.key === 'Backspace') {
+        if (index > 0) otpBoxes[index - 1].focus();
+      }
+    });
+  });
+
+  window.bjlRequestOTP = async function (event, type) {
+    if (event && event.preventDefault) event.preventDefault();
+    currentAuthType = type;
+
+    if (type === 'email') {
+      currentTargetValue = document.getElementById('bjl-email-input').value.trim();
+    } else {
+      currentTargetValue = mobileInput.value.trim();
+    }
+
+    showAlert('Sending OTP, please wait...', 'info');
+
+    try {
+      var response = await fetch(BACKEND_URL + '/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: currentAuthType, destination: currentTargetValue })
+      });
+      var data = await response.json();
+
+      if (response.ok) {
+        targetDisplay.textContent = currentAuthType === 'mobile' ? ('+91 ' + currentTargetValue) : currentTargetValue;
+        window.bjlSwitchView('otp');
+        showAlert('OTP has been sent successfully!', 'success');
+        startResendTimer(30);
+      } else {
+        showAlert((data && data.message) || 'Failed to send OTP. Try again.', 'error');
+      }
+    } catch (err) {
+      // Could not reach the OTP server. Show a real error instead of
+      // pretending a code was sent.
+      showAlert('Could not reach the verification server. Please check your connection and try again.', 'error');
+    }
+  };
+
+  window.bjlVerifyOTP = async function (event) {
+    if (event && event.preventDefault) event.preventDefault();
+
+    var enteredOTP = '';
+    otpBoxes.forEach(function (box) { enteredOTP += box.value; });
+
+    if (enteredOTP.length < 6) {
+      showAlert('Please enter the complete 6-digit OTP', 'error');
+      return;
+    }
+
+    showAlert('Verifying code...', 'info');
+
+    try {
+      var response = await fetch(BACKEND_URL + '/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ destination: currentTargetValue, otp: enteredOTP })
+      });
+      var data = await response.json();
+
+      if (response.ok) {
+        showAlert('Verification Successful! Redirecting...', 'success');
+        setTimeout(function () {
+          window.bjlClose();
+          alert('Login Successful!');
+        }, 900);
+      } else {
+        showAlert((data && data.message) || 'Invalid OTP code. Please try again.', 'error');
+      }
+    } catch (err) {
+      showAlert('Backend server unavailable for OTP verification.', 'error');
+    }
+  };
+
+  window.bjlResendOTP = function () {
+    otpBoxes.forEach(function (box) { box.value = ''; });
+    otpBoxes[0].focus();
+    window.bjlRequestOTP({ preventDefault: function () {} }, currentAuthType);
+  };
+
+  function startResendTimer(seconds) {
+    clearInterval(timerInterval);
+    resendBtn.disabled = true;
+    var remaining = seconds;
+    timerSpan.textContent = '(' + remaining + 's)';
+
+    timerInterval = setInterval(function () {
+      remaining--;
+      if (remaining <= 0) {
+        clearInterval(timerInterval);
+        resendBtn.disabled = false;
+        timerSpan.textContent = '';
+      } else {
+        timerSpan.textContent = '(' + remaining + 's)';
+      }
+    }, 1000);
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) window.bjlClose();
+  });
+})();
+
     </script>
     </div>
 </body>
