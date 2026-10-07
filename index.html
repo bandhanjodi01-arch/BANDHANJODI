@@ -533,6 +533,68 @@
         button, a { -webkit-tap-highlight-color: transparent; }
         img { max-width: 100%; }
     </style>
+    <!-- Tailwind runtime + matches app (merged from 0007.html) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style id="bjMatchesStyles">
+#bjMatchesApp { font-family: 'Inter', sans-serif;
+            -webkit-user-select: none;
+            user-select: none; }
+#bjMatchesApp .no-scrollbar::-webkit-scrollbar { display: none; }
+#bjMatchesApp .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+#bjMatchesApp .card-container { perspective: 1000px; }
+#bjMatchesApp .swipe-card { touch-action: pan-y;
+            transition: transform 0.25s ease, opacity 0.25s ease; }
+#bjMatchesApp .swipe-card.swiping { transition: none; }
+#bjMatchesApp .stamp { position: absolute; top: 26px; z-index: 30; font-weight: 800; letter-spacing: .08em;
+            padding: 6px 14px; border-radius: 12px; font-size: 18px; opacity: 0; transition: opacity .15s;
+            border: 3px solid currentColor; text-transform: uppercase; }
+#bjMatchesApp .stamp-like { left: 20px; color: #10b981; transform: rotate(-12deg); }
+#bjMatchesApp .stamp-nope { right: 20px; color: #ef4444; transform: rotate(12deg); }
+#bjMatchesApp #toast { position: absolute; left: 50%; bottom: 92px; transform: translateX(-50%) translateY(12px);
+            opacity: 0; transition: all .25s ease; z-index: 80; max-width: 88%;
+            background: #0f172a; color: #fff; font-size: 13px; font-weight: 500;
+            padding: 10px 16px; border-radius: 999px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+            text-align: center; pointer-events: none; }
+#bjMatchesApp #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+#bjMatchesApp .app-modal { transition: opacity .2s ease, transform .2s ease; }
+#bjMatchesApp .app-modal.hidden { display: none !important; }
+#bjMatchesApp .active-filter { border-color: #e11d48 !important;
+            background: #fff1f2 !important;
+            color: #be123c !important; }
+#bjMatchesApp .chat-section-title { font-size: 15px; font-weight: 700; color: #444; margin: 14px 0 10px 4px; }
+#bjMatchesApp .online-row { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+#bjMatchesApp .online-row::-webkit-scrollbar { display: none; }
+#bjMatchesApp .online-person { display: flex; flex-direction: column; align-items: center; width: 64px; flex-shrink: 0; }
+#bjMatchesApp .online-person .av { position: relative; width: 58px; height: 58px; margin-bottom: 6px; }
+#bjMatchesApp .online-person .av img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+#bjMatchesApp .online-person .dot { position: absolute; bottom: 2px; right: 2px; width: 13px; height: 13px; background: #00c853; border: 2px solid #fff; border-radius: 50%; }
+#bjMatchesApp .online-person span { font-size: 11px; color: #333; text-align: center; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#bjMatchesApp .chat-row { display: flex; align-items: center; gap: 12px; padding: 12px 4px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+#bjMatchesApp .chat-row:hover { background: #fafafa; }
+#bjMatchesApp .chat-row img { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+#bjMatchesApp .chat-row .meta { flex: 1; min-width: 0; }
+#bjMatchesApp .chat-row .top { display: flex; justify-content: space-between; align-items: center; }
+#bjMatchesApp .chat-row .nm { font-size: 15px; font-weight: 700; color: #111; }
+#bjMatchesApp .chat-row .tm { font-size: 11px; color: #1a3b70; font-weight: 500; }
+#bjMatchesApp .chat-row .bot { display: flex; justify-content: space-between; align-items: center; }
+#bjMatchesApp .chat-row .lm { font-size: 13px; color: #777; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 190px; }
+#bjMatchesApp .chat-row .un { background: #123880; color: #fff; font-size: 10px; font-weight: 700; width: 19px; height: 19px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+#bjMatchesApp #thread-view { background: #e9edf3; }
+#bjMatchesApp .thread-head { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: #fff; border-bottom: 1px solid #eaeaea; flex-shrink: 0; }
+#bjMatchesApp .thread-head img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+#bjMatchesApp .thread-head h3 { font-size: 15px; font-weight: 700; color: #1e293b; }
+#bjMatchesApp .thread-head p { font-size: 11px; color: #16a34a; font-weight: 600; }
+#bjMatchesApp .thread-msgs { flex: 1; min-height: 0; overflow-y: auto; padding: 16px 14px; display: flex; flex-direction: column; gap: 8px; }
+#bjMatchesApp .bub { max-width: 78%; padding: 9px 13px; border-radius: 16px; font-size: 14px; line-height: 1.35; word-wrap: break-word; }
+#bjMatchesApp .bub.them { background: #fff; color: #1f2937; border-bottom-left-radius: 4px; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+#bjMatchesApp .bub.me { background: #123880; color: #fff; border-bottom-right-radius: 4px; align-self: flex-end; }
+#bjMatchesApp .bub .t { font-size: 10px; opacity: .65; margin-top: 3px; display: block; text-align: right; }
+#bjMatchesApp .thread-in { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #fff; border-top: 1px solid #eaeaea; flex-shrink: 0; }
+#bjMatchesApp .thread-in input { flex: 1; border: 1px solid #d7dbe2; border-radius: 22px; padding: 11px 16px; font-size: 14px; outline: none; }
+#bjMatchesApp .thread-in input:focus { border-color: #123880; }
+#bjMatchesApp .thread-in button { width: 44px; height: 44px; border-radius: 50%; border: none; background: #123880; color: #fff; font-size: 16px; cursor: pointer; flex-shrink: 0; }
+    </style>
+    <style>#checkout-modal { z-index: 150; }</style>
 </head>
 <body class="bg-rose-50/40 text-slate-800 font-sans selection:bg-rose-500 selection:text-white">
     <div id="phone">
@@ -2322,6 +2384,7 @@
             document.getElementById('summary_prefCountry').innerText = getVal('prefCountry');
 
             document.getElementById('summary_intro').innerText = getVal('introText');
+            if (window.bjSaveFromRegistration) { try { window.bjSaveFromRegistration(); } catch (e) {} }
         }
 
         function shareProfile() {
@@ -2638,6 +2701,7 @@
         function completePurchase() {
             const durationText = planDetails[activePlanName] ? planDetails[activePlanName].duration : 'selected duration';
             closeCheckout();
+            if (window.bjMarkPaid) { try { window.bjMarkPaid(activePlanName); } catch (e) {} }
             alert(`🎉 Payment confirmation received for the ${activePlanName} plan (${durationText}). Our matchmaking advisor will verify and activate your membership shortly.`);
         }
     </script>
@@ -2826,6 +2890,7 @@
   //   Render        : 'https://your-service.onrender.com/api'
   //   Custom domain : 'https://api.bandhanjodi.com/api'
   var BACKEND_URL = 'https://bandhanjodi-otp.onrender.com/api';
+  try { window.BJ_BACKEND = BACKEND_URL; } catch (e) {}
 
   var overlay = document.getElementById('bjLogin');
   var emailView = document.getElementById('bjl-email-view');
@@ -2970,10 +3035,13 @@
       var data = await response.json();
 
       if (response.ok) {
-        showAlert('Verification Successful! Redirecting...', 'success');
+        showAlert('Verification Successful! Opening your matches...', 'success');
         setTimeout(function () {
           window.bjlClose();
-          alert('Login Successful!');
+          // Login complete -> open the matches app (merged from 0007.html)
+          var m = document.getElementById('bjMatchesApp');
+          if (m) { m.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+          if (window.bjAfterLogin) { try { window.bjAfterLogin(currentTargetValue); } catch (e) {} }
         }, 900);
       } else {
         showAlert((data && data.message) || 'Invalid OTP code. Please try again.', 'error');
@@ -3014,5 +3082,1273 @@
 
     </script>
     </div>
+
+    <!-- ================= Matches app (merged from 0007.html) ================= -->
+    <div id="bjMatchesApp" class="bg-slate-100 min-h-screen flex items-center justify-center p-0 sm:p-4"
+         style="display:none; position:fixed; inset:0; z-index:100; overflow:auto;">
+
+
+    <!-- Mobile Screen Wrapper -->
+    <div class="w-full max-w-md h-[100vh] sm:h-[880px] bg-white sm:rounded-[36px] shadow-2xl flex flex-col overflow-hidden relative border border-gray-200">
+
+        <!-- Header Section -->
+        <header class="pt-4 px-4 pb-2 bg-white flex-shrink-0 z-10">
+            <!-- Top bar -->
+            <div class="flex items-center justify-between mb-3 gap-2">
+                <div class="flex items-center gap-2 min-w-0">
+                    <button id="open-account-btn" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 border border-slate-200 hover:bg-slate-200 transition focus:outline-none flex-shrink-0">
+                        <i class="fa-solid fa-user text-lg"></i>
+                    </button>
+                    <h1 class="text-2xl font-extrabold tracking-tight text-slate-900">Matches</h1>
+                </div>
+                <div class="flex items-center gap-1.5 flex-shrink-0">
+                    <!-- Search -->
+                    <button id="open-search-btn" class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 border border-slate-200 hover:bg-slate-200 transition focus:outline-none">
+                        <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                    </button>
+                    <!-- ask JIA -->
+                    <button id="ask-jia-btn" class="bg-gradient-to-r from-pink-600 to-rose-500 text-white font-bold text-[11px] px-2.5 py-1.5 rounded-full shadow-sm flex items-center gap-1 hover:brightness-105 transition whitespace-nowrap">
+                        <span>ask JIA</span>
+                        <span class="bg-white/20 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px]">+</span>
+                    </button>
+                    <!-- Shortlist -->
+                    <button id="open-shortlist-btn" class="relative w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 border border-slate-200 hover:bg-slate-200 transition focus:outline-none">
+                        <i class="fa-regular fa-star text-base"></i>
+                        <span id="shortlist-badge" class="hidden absolute -top-1 -right-1 bg-amber-500 text-white text-[10px] font-bold px-1.5 rounded-full border-2 border-white">0</span>
+                    </button>
+                    <!-- Bell / Messages -->
+                    <button id="open-messages-btn" class="relative w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 border border-slate-200 hover:bg-slate-200 transition focus:outline-none">
+                        <i class="fa-regular fa-bell text-base"></i>
+                        <span id="bell-badge" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 rounded-full border-2 border-white">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Search input bar -->
+            <div class="relative mb-3">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input id="quick-search" type="text" placeholder="Tell us what you're looking for" class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm text-slate-700 focus:outline-none focus:border-rose-400 shadow-sm placeholder:text-slate-400">
+            </div>
+
+            <!-- Filter chips -->
+            <div id="filter-chips" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 text-sm font-medium text-slate-700">
+                <button class="flex items-center gap-1.5 px-3.5 py-1.5 border border-slate-300 rounded-full hover:border-slate-400 bg-white shadow-xs whitespace-nowrap">
+                    <i class="fa-sliders fa-solid text-slate-500 text-xs"></i>
+                    <span>Filters</span>
+                </button>
+                <div class="h-6 w-[1px] bg-slate-200 flex-shrink-0"></div>
+                <button class="chip px-3.5 py-1.5 border border-slate-300 rounded-full hover:border-slate-400 bg-white shadow-xs whitespace-nowrap">Online</button>
+                <button class="chip px-3.5 py-1.5 border border-slate-300 rounded-full hover:border-slate-400 bg-white shadow-xs whitespace-nowrap">Self Profiles</button>
+                <button class="chip px-3.5 py-1.5 border border-slate-300 rounded-full hover:border-slate-400 bg-white shadow-xs whitespace-nowrap">Doctors</button>
+                <button class="chip px-3.5 py-1.5 border border-slate-300 rounded-full hover:border-slate-400 bg-white shadow-xs whitespace-nowrap">Engineers</button>
+            </div>
+        </header>
+
+        <!-- Main Swipe Container -->
+        <main class="flex-1 px-3 py-1 relative overflow-hidden flex flex-col justify-center">
+            <!-- Orange Bordered Container -->
+            <div id="orange-wrapper" class="relative w-full h-full border-[3.5px] border-orange-500 rounded-[28px] p-1.5 bg-black/5 overflow-hidden shadow-md flex flex-col">
+                <div id="card-stack" class="relative w-full h-full rounded-[22px] overflow-hidden">
+                    <!-- Cards injected via JavaScript -->
+                </div>
+            </div>
+
+            <!-- No Profiles Left View -->
+            <div id="empty-state" class="hidden absolute inset-0 m-4 flex-col items-center justify-center bg-white rounded-[24px] text-center p-6 shadow-sm border border-slate-200">
+                <div class="w-20 h-20 bg-rose-50 text-rose-500 rounded-full flex items-center justify-center mb-4 text-3xl">
+                    <i class="fa-solid fa-heart-crack"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 mb-1">No More Profiles</h3>
+                <p class="text-slate-500 text-sm mb-6">You've caught up with all available matches. Check your shortlist or start over.</p>
+                <div class="flex gap-3">
+                    <button id="reset-btn" class="bg-gradient-to-r from-orange-500 to-rose-500 text-white font-semibold px-5 py-2.5 rounded-full shadow-md hover:opacity-90 transition">
+                        Start Over
+                    </button>
+                    <button id="empty-shortlist-btn" class="bg-white border border-slate-300 text-slate-700 font-semibold px-5 py-2.5 rounded-full hover:bg-slate-50 transition">
+                        View Shortlist
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <footer class="bg-white border-t border-slate-100 px-3 py-2 flex-shrink-0 z-10">
+            <div class="grid grid-cols-4 gap-1">
+                <button data-nav="matches" class="flex flex-col items-center py-1 text-rose-500 font-medium">
+                    <i class="fa-solid fa-heart text-xl"></i>
+                    <span class="text-[11px] font-semibold mt-0.5">Matches</span>
+                </button>
+                <button data-nav="activity" class="flex flex-col items-center py-1 text-slate-500 hover:text-slate-800">
+                    <div class="relative">
+                        <i class="fa-regular fa-clock text-xl"></i>
+                        <span id="activity-badge" class="hidden absolute -top-1 -right-3 bg-red-500 text-white text-[9px] font-bold px-1 rounded-full">0</span>
+                    </div>
+                    <span class="text-[11px] mt-0.5">Activity</span>
+                </button>
+                <button data-nav="messenger" class="flex flex-col items-center py-1 text-slate-500 hover:text-slate-800">
+                    <div class="relative">
+                        <i class="fa-regular fa-comments text-xl"></i>
+                    </div>
+                    <span class="text-[11px] mt-0.5">Messenger</span>
+                </button>
+                <button data-nav="upgrade" class="flex flex-col items-center py-1 text-slate-500 hover:text-slate-800">
+                    <div class="border border-green-500 text-green-600 bg-green-50 rounded px-1 text-[10px] font-bold">69% OFF</div>
+                    <span class="text-[11px] mt-0.5">Upgrade</span>
+                </button>
+            </div>
+        </footer>
+
+        <!-- ============ My Account Modal ============ -->
+        <div id="account-modal" class="app-modal hidden absolute inset-0 bg-slate-50 z-50 flex-col overflow-y-auto no-scrollbar">
+            <div class="bg-white px-4 py-3 border-b flex items-center gap-3 sticky top-0 z-20">
+                <button data-close="account-modal" class="text-slate-700 hover:text-slate-900 text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold text-slate-800">My Account</h2>
+            </div>
+            <div class="p-4 space-y-4">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden text-center pb-6">
+                    <div class="h-28 bg-gradient-to-r from-red-900 via-rose-800 to-rose-900"></div>
+                    <div class="relative -mt-16 w-28 h-28 mx-auto">
+                        <div class="w-full h-full rounded-full bg-slate-200 border-4 border-white flex items-center justify-center overflow-hidden">
+                            <img id="acct-photo" alt="" class="w-full h-full object-cover" style="display:none;">
+                            <i id="acct-photo-ph" class="fa-solid fa-user text-5xl text-slate-400"></i>
+                        </div>
+                        <button id="acct-photo-btn" title="Update photo" class="absolute bottom-1 right-1 bg-sky-500 text-white p-2 rounded-full border-2 border-white shadow text-xs">
+                            <i class="fa-solid fa-camera"></i>
+                        </button>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mt-3"><span id="acct-name">Your Profile</span> <span id="acct-tick" style="display:none" class="text-sky-500 align-middle" title="Verified premium member"><i class="fa-solid fa-circle-check"></i></span> <span id="acct-id" class="text-sm font-normal text-slate-500"></span></h3>
+                    <div class="grid grid-cols-2 gap-4 my-4 px-6 border-y border-slate-100 py-3 text-slate-700">
+                        <button id="acct-edit-profile" class="flex flex-col items-center gap-1 font-medium text-sm hover:text-rose-600">
+                            <i class="fa-regular fa-file-lines text-lg"></i><span>Edit Profile</span>
+                        </button>
+                        <button id="acct-edit-pref" class="flex flex-col items-center gap-1 font-medium text-sm hover:text-rose-600">
+                            <i class="fa-regular fa-pen-to-square text-lg"></i><span>Edit Preferences</span>
+                        </button>
+                    </div>
+                    <div class="text-xs space-y-2 text-slate-600">
+                        <div class="flex items-center justify-center gap-1 text-sky-600 font-semibold text-sm">
+                            <i class="fa-solid fa-circle-check"></i> Verified
+                        </div>
+                        <p class="pt-1">Site Language: <span class="font-medium text-slate-800">Eng</span> | <span class="font-medium text-slate-800">हिंदी</span></p>
+                        <p>Account type: <span id="acct-type" class="font-bold text-slate-800">Local Account</span></p>
+                    </div>
+                </div>
+
+                <!-- Full profile information -->
+                <div id="acct-details"></div>
+
+                <!-- Quick access rows -->
+                <div class="bg-white rounded-2xl border border-slate-200 divide-y divide-slate-100 text-sm">
+                    <button id="acct-shortlist" class="w-full flex items-center justify-between px-4 py-3.5 hover:bg-slate-50">
+                        <span class="flex items-center gap-3 text-slate-700"><i class="fa-regular fa-star text-amber-500"></i> My Shortlist</span>
+                        <span class="flex items-center gap-2 text-slate-400"><span id="acct-shortlist-count" class="text-xs font-semibold">0</span><i class="fa-solid fa-chevron-right text-xs"></i></span>
+                    </button>
+                    <button id="acct-messages" class="w-full flex items-center justify-between px-4 py-3.5 hover:bg-slate-50">
+                        <span class="flex items-center gap-3 text-slate-700"><i class="fa-regular fa-bell text-rose-500"></i> Messages from clients</span>
+                        <span class="flex items-center gap-2 text-slate-400"><span id="acct-messages-count" class="text-xs font-semibold">0</span><i class="fa-solid fa-chevron-right text-xs"></i></span>
+                    </button>
+                </div>
+
+                <div class="bg-emerald-50 rounded-2xl border border-emerald-200 p-4 relative overflow-hidden">
+                    <div class="absolute top-0 right-4 bg-amber-500 text-white px-2 py-1.5 rounded-b-md text-xs"><i class="fa-solid fa-crown"></i></div>
+                    <h4 class="text-lg font-bold text-red-800 mb-2">Membership Details</h4>
+                    <div class="space-y-3 text-xs text-slate-700">
+                        <div><p class="text-slate-500">Your membership plan</p><p id="acct-plan" class="font-bold text-slate-800 text-sm">Exclusive 1-Month Free</p></div>
+                        <div><p class="text-slate-500">Contacts balance</p><p class="font-semibold text-slate-800">Viewed: 5/ 5</p></div>
+                        <div><p class="text-slate-500">Membership validity</p><p class="font-semibold text-slate-800">Valid till: 9 Oct 2026</p></div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-emerald-200/60 text-center text-[11px] text-slate-600">
+                        If you were not able to contact any member, please raise a complaint
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ Search Modal ============ -->
+        <div id="search-modal" class="app-modal hidden absolute inset-0 bg-slate-50 z-50 flex-col overflow-y-auto no-scrollbar">
+            <div class="bg-white px-4 py-3 border-b flex items-center gap-3 sticky top-0 z-20">
+                <button data-close="search-modal" class="text-slate-700 hover:text-slate-900 text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold text-slate-800">Search</h2>
+            </div>
+            <div class="bg-white border-b flex text-xs font-semibold text-slate-600">
+                <button class="flex-1 py-3 text-center border-b-2 border-slate-800 text-slate-900">Search by Criteria</button>
+                <button class="flex-1 py-3 text-center text-slate-400">Search by Profile Id</button>
+            </div>
+            <div class="p-4 space-y-4 flex-1 flex flex-col justify-between">
+                <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
+                    <div class="flex items-center justify-between border-b pb-3 mb-2">
+                        <span class="font-bold text-slate-800 text-sm">Basic Details</span>
+                        <button class="text-xs text-slate-500 hover:text-slate-800 flex items-center gap-1"><i class="fa-solid fa-rotate-left text-[10px]"></i> Reset All Filters</button>
+                    </div>
+                    <div class="divide-y divide-slate-100 text-xs">
+                        <div class="py-3 flex items-center justify-between">
+                            <div class="flex items-center gap-3"><i class="fa-regular fa-user text-slate-500 text-base"></i>
+                                <div><p class="font-bold text-slate-800">Age</p><p class="text-slate-500">42 Years - 49 Years</p></div>
+                            </div><i class="fa-solid fa-chevron-right text-slate-400"></i>
+                        </div>
+                        <div class="py-3 flex items-center justify-between">
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-ruler-vertical text-slate-500 text-base"></i>
+                                <div><p class="font-bold text-slate-800">Height</p><p class="text-slate-500">5' 2" Ft. - 5' 10" Ft.</p></div>
+                            </div><i class="fa-solid fa-chevron-right text-slate-400"></i>
+                        </div>
+                        <div class="py-3 flex items-center justify-between">
+                            <div class="flex items-center gap-3"><i class="fa-regular fa-gem text-slate-500 text-base"></i>
+                                <div><p class="font-bold text-slate-800">Marital Status</p><p class="text-slate-500">Doesn't Matter</p></div>
+                            </div><i class="fa-solid fa-chevron-right text-slate-400"></i>
+                        </div>
+                        <div class="py-3 flex items-center justify-between">
+                            <div class="flex items-center gap-3"><i class="fa-solid fa-hands-praying text-slate-500 text-base"></i>
+                                <div><p class="font-bold text-slate-800">Religion</p><p class="text-slate-500">Doesn't Matter</p></div>
+                            </div><i class="fa-solid fa-chevron-right text-slate-400"></i>
+                        </div>
+                    </div>
+                </div>
+                <button id="show-profiles-btn" class="w-full bg-blue-900 text-white font-bold py-3.5 rounded-xl text-sm shadow-md hover:bg-blue-950 transition mt-4">Show Me Profiles</button>
+            </div>
+        </div>
+
+        <!-- ============ Messages Modal (bell) ============ -->
+        <div id="messages-modal" class="app-modal hidden absolute inset-0 bg-slate-50 z-50 flex-col">
+            <div class="bg-white px-4 py-3 border-b flex items-center gap-3 sticky top-0 z-20">
+                <button data-close="messages-modal" class="text-slate-700 hover:text-slate-900 text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold text-slate-800">Messages</h2>
+                <button id="mark-all-read" class="ml-auto text-xs font-semibold text-rose-600 hover:text-rose-700">Mark all read</button>
+            </div>
+            <div id="messages-list" class="flex-1 overflow-y-auto no-scrollbar divide-y divide-slate-100 bg-white"></div>
+        </div>
+
+        <!-- ============ Shortlist Modal ============ -->
+        <div id="shortlist-modal" class="app-modal hidden absolute inset-0 bg-slate-50 z-50 flex-col">
+            <div class="bg-white px-4 py-3 border-b flex items-center gap-3 sticky top-0 z-20">
+                <button data-close="shortlist-modal" class="text-slate-700 hover:text-slate-900 text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold text-slate-800">My Shortlist</h2>
+            </div>
+            <div id="shortlist-list" class="flex-1 overflow-y-auto no-scrollbar divide-y divide-slate-100 bg-white"></div>
+        </div>
+
+        <!-- ============ Profile Detail Modal ============ -->
+        <div id="detail-modal" class="app-modal hidden absolute inset-0 bg-slate-50 z-50 flex-col overflow-y-auto no-scrollbar">
+            <div class="bg-white px-4 py-3 border-b flex items-center gap-3 sticky top-0 z-20">
+                <button data-close="detail-modal" class="text-slate-700 hover:text-slate-900 text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold text-slate-800">Profile Details</h2>
+            </div>
+            <div id="detail-body" class="pb-6"></div>
+        </div>
+
+        <!-- ============ Chat list (merged from 0008) ============ -->
+        <div id="chat-view" class="app-modal hidden absolute inset-0 bg-white z-50 flex-col">
+            <div class="bg-white px-4 py-3 border-b flex items-center gap-3 sticky top-0 z-20">
+                <button data-close="chat-view" class="text-slate-700 hover:text-slate-900 text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+                <h2 class="text-lg font-bold text-slate-800">Chat</h2>
+                <span class="ml-auto text-[11px] font-semibold text-green-700 bg-green-50 px-2 py-1 rounded-full"><i class="fa-solid fa-circle-check"></i> Safety</span>
+            </div>
+            <div class="flex-1 min-h-0 overflow-y-auto no-scrollbar px-4 pb-6">
+                <div class="chat-section-title">Recently Online</div>
+                <div class="online-row" id="chat-online-row"></div>
+                <div class="chat-section-title">Recent Chats</div>
+                <div id="chat-recent-list"></div>
+            </div>
+        </div>
+
+        <!-- ============ Chat thread (merged from 0008) ============ -->
+        <div id="thread-view" class="app-modal hidden absolute inset-0 z-[60] flex-col">
+            <div class="thread-head">
+                <button id="thread-back" class="text-slate-700 hover:text-slate-900 text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+                <img id="thread-avatar" src="" alt="">
+                <div class="flex-1 min-w-0">
+                    <h3 id="thread-name" class="truncate">Chat</h3>
+                    <p><i class="fa-solid fa-circle" style="font-size:7px"></i> Online</p>
+                </div>
+                <button class="text-slate-700 hover:text-slate-900 text-lg"><i class="fa-solid fa-phone"></i></button>
+            </div>
+            <div class="thread-msgs" id="thread-msgs"></div>
+            <div class="thread-in">
+                <input id="thread-input" type="text" placeholder="Type a message..." autocomplete="off">
+                <button id="thread-send"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div id="toast"></div>
+
+    </div>
+
+    
+
+    </div>
+    <script>
+
+    (function () {
+        'use strict';
+
+        /* ---------------- Storage helpers ---------------- */
+        var store = {
+            get: function (k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+            set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+        };
+
+        /* ---------------- Data ---------------- */
+        var profilesData = [
+            {
+                id: 1, name: "A Gupta", age: 46, height: "5' 7\"", location: "Varanasi, UP",
+                caste: "Bania - Ayodhyavasi", profession: "Business - Hotels / Hospitality",
+                income: "Earns ₹25-35 L", education: "B.A", maritalStatus: "Divorced - Have Children",
+                managedBy: "Self", badges: ["Pro Max", "Active Today"], photosCount: 7, verified: true,
+                diet: "Vegetarian", drink: "No", smoke: "No", family: "3 of 5 siblings settled",
+                lastActive: "Active today", about: "Family-oriented businessman from Varanasi. Looking for a caring life partner who values tradition and togetherness.",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 2, name: "Sanjeev S", age: 51, height: "5' 7\"", location: "New Delhi",
+                caste: "Sharma - Brahmin", profession: "Chef / Sommelier / Food Critic",
+                income: "Earns ₹35-50 L", education: "Hotel Management", maritalStatus: "Never Married",
+                managedBy: "Sibling", badges: ["Premium", "2h ago"], photosCount: 4, verified: true,
+                diet: "Non-Vegetarian", drink: "Occasionally", smoke: "No", family: "Parents, 1 elder sister",
+                lastActive: "2 hours ago", about: "A food lover who has spent 20 years in the hospitality world. Seeking a warm companion to share life's flavours with.",
+                image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 3, name: "Rajesh Kumar", age: 34, height: "5' 10\"", location: "Lucknow, UP",
+                caste: "Kayastha", profession: "Senior Software Engineer",
+                income: "Earns ₹20-25 L", education: "B.Tech (IIT)", maritalStatus: "Never Married",
+                managedBy: "Parents", badges: ["VIP Member", "Online"], photosCount: 9, verified: true,
+                diet: "Vegetarian", drink: "No", smoke: "No", family: "Father retired govt. officer, mother homemaker",
+                lastActive: "Online now", about: "Software engineer who loves cricket, travel and quiet weekends. Looking for someone who is ambitious yet grounded.",
+                image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 4, name: "Dr. Ananya Roy", age: 31, height: "5' 4\"", location: "Kolkata, WB",
+                caste: "Brahmin - Kulin", profession: "Cardiologist",
+                income: "Earns ₹30-40 L", education: "MD, MBBS", maritalStatus: "Never Married",
+                managedBy: "Self", badges: ["Doctor", "Verified"], photosCount: 5, verified: true,
+                diet: "Non-Vegetarian", drink: "Occasionally", smoke: "No", family: "Academic family from Kolkata",
+                lastActive: "Active today", about: "A cardiologist who balances a demanding career with family, music and Bengali literature. Seeking a kind, understanding partner.",
+                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 5, name: "Meera Nair", age: 28, height: "5' 5\"", location: "Kochi, Kerala",
+                caste: "Nair", profession: "Chartered Accountant",
+                income: "Earns ₹15-20 L", education: "CA, B.Com", maritalStatus: "Never Married",
+                managedBy: "Self", badges: ["New", "Online"], photosCount: 6, verified: true,
+                diet: "Vegetarian", drink: "No", smoke: "No", family: "Father businessman, mother teacher",
+                lastActive: "Online now", about: "A practising CA who enjoys classical dance and cooking. Looking for a supportive partner with a good sense of humour.",
+                image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 6, name: "Vikram Singh", age: 38, height: "5' 11\"", location: "Jaipur, Rajasthan",
+                caste: "Rajput", profession: "Civil Services Officer",
+                income: "Earns ₹18-24 L", education: "M.A, UPSC", maritalStatus: "Never Married",
+                managedBy: "Parents", badges: ["Verified", "1d ago"], photosCount: 3, verified: true,
+                diet: "Vegetarian", drink: "No", smoke: "No", family: "Traditional Rajput family, 2 brothers",
+                lastActive: "Yesterday", about: "A civil servant posted in Jaipur. Values integrity, family and simplicity. Looking for a life partner to build a home with.",
+                image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop"
+            }
+        ];
+
+        // Messages that clients have sent to you
+        var clientMessages = [];
+
+        /* ---------------- State ---------------- */
+        var acted = new Set(store.get('bj_acted', []));
+        var shortlist = new Set(store.get('bj_shortlist', []));
+        var interests = new Set(store.get('bj_interests', []));
+        var ignored = new Set(store.get('bj_ignored', []));
+        var readMsgs = new Set(store.get('bj_read_msgs', []));
+
+        function saveState() {
+            store.set('bj_acted', Array.from(acted));
+            store.set('bj_shortlist', Array.from(shortlist));
+            store.set('bj_interests', Array.from(interests));
+            store.set('bj_ignored', Array.from(ignored));
+            store.set('bj_read_msgs', Array.from(readMsgs));
+        }
+
+        function profileById(id) { for (var i = 0; i < profilesData.length; i++) { if (profilesData[i].id === id) return profilesData[i]; } return null; }
+
+        /* ---------------- Elements ---------------- */
+        var stackContainer = document.getElementById('card-stack');
+        var emptyState = document.getElementById('empty-state');
+        var orangeWrapper = document.getElementById('orange-wrapper');
+
+        /* ---------------- Toast ---------------- */
+        var toastEl = document.getElementById('toast');
+        var toastTimer = null;
+        function toast(msg) {
+            toastEl.textContent = msg;
+            toastEl.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 1900);
+        }
+
+        /* ---------------- Modals ---------------- */
+        function openModal(id) {
+            var m = document.getElementById(id);
+            if (!m) return;
+            m.classList.remove('hidden');
+            m.classList.add('flex');
+        }
+        function closeModal(id) {
+            var m = document.getElementById(id);
+            if (!m) return;
+            m.classList.add('hidden');
+            m.classList.remove('flex');
+        }
+        function closeAllModals() {
+            ['account-modal', 'search-modal', 'messages-modal', 'shortlist-modal', 'detail-modal', 'chat-view', 'thread-view'].forEach(closeModal);
+        }
+        document.querySelectorAll('[data-close]').forEach(function (btn) {
+            btn.addEventListener('click', function () { closeModal(btn.getAttribute('data-close')); });
+        });
+
+        /* ---------------- Badges ---------------- */
+        function unreadCount() {
+            var n = 0;
+            clientMessages.forEach(function (m) { if (!readMsgs.has(m.id)) n++; });
+            return n;
+        }
+        function refreshBadges() {
+            var u = unreadCount();
+            var bell = document.getElementById('bell-badge');
+            var act = document.getElementById('activity-badge');
+            bell.textContent = String(u);
+            act.textContent = String(u);
+            bell.classList.toggle('hidden', u === 0);
+            act.classList.toggle('hidden', u === 0);
+
+            var s = shortlist.size;
+            var sb = document.getElementById('shortlist-badge');
+            sb.textContent = String(s);
+            sb.classList.toggle('hidden', s === 0);
+
+            document.getElementById('acct-shortlist-count').textContent = String(s);
+            document.getElementById('acct-messages-count').textContent = String(clientMessages.length);
+        }
+
+        /* ---------------- Card rendering ---------------- */
+        function remainingProfiles() {
+            return profilesData.filter(function (p) { return !acted.has(p.id); });
+        }
+
+        function createCardElement(profile) {
+            var card = document.createElement('div');
+            card.className = 'swipe-card absolute inset-0 w-full h-full rounded-[22px] overflow-hidden bg-slate-900 shadow-xl flex flex-col justify-between';
+            card.dataset.id = profile.id;
+
+            var badgesHtml = profile.badges.map(function (b) {
+                var cls = (b.indexOf('Pro') !== -1 || b.indexOf('Premium') !== -1 || b.indexOf('VIP') !== -1)
+                    ? 'bg-rose-600/90' : 'bg-slate-700/80';
+                return '<span class="' + cls + ' backdrop-blur-md text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">' + b + '</span>';
+            }).join('');
+
+            card.innerHTML =
+                '<div class="absolute inset-0 z-0">' +
+                    '<img src="' + profile.image + '" alt="' + profile.name + '" class="w-full h-full object-cover object-center pointer-events-none" />' +
+                    '<div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20"></div>' +
+                '</div>' +
+                '<div class="stamp stamp-like">Interest</div>' +
+                '<div class="stamp stamp-nope">Ignore</div>' +
+                '<div class="relative z-10 p-3.5 flex justify-between items-start pointer-events-none">' +
+                    '<div class="w-8 h-8 rounded-full bg-orange-500/80 backdrop-blur-md flex items-center justify-center text-white shadow"><i class="fa-solid fa-sparkles text-xs"></i></div>' +
+                    '<div class="bg-black/40 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded-full flex items-center gap-1.5 border border-white/20"><i class="fa-regular fa-images text-xs"></i><span>' + profile.photosCount + '</span></div>' +
+                '</div>' +
+                '<div class="relative z-10 p-4 pt-0 text-white flex flex-col justify-end">' +
+                    '<div class="flex items-center gap-2 mb-2 flex-wrap">' + badgesHtml + '</div>' +
+                    '<h2 class="text-2xl font-bold tracking-wide flex items-center gap-2 pointer-events-none"><span>' + profile.name + ', ' + profile.age + '</span>' +
+                        (profile.verified ? '<i class="fa-solid fa-circle-check text-sky-400 text-lg"></i>' : '') + '</h2>' +
+                    '<div class="mt-1.5 text-xs text-slate-200 space-y-1 font-normal opacity-95 pointer-events-none">' +
+                        '<p class="truncate">' + profile.height + ' · ' + profile.location + ' · ' + profile.caste + '</p>' +
+                        '<p class="truncate">' + profile.profession + ' · ' + profile.income + '</p>' +
+                        '<p class="truncate">' + profile.education + '</p>' +
+                        '<p class="truncate">' + profile.maritalStatus + '</p>' +
+                    '</div>' +
+                    '<p class="text-[11px] italic text-slate-300 mt-2 bg-black/30 w-max px-2 py-0.5 rounded pointer-events-none">Profile managed by ' + profile.managedBy + '</p>' +
+                    '<p class="text-[11px] text-rose-200 mt-2 pointer-events-none"><i class="fa-solid fa-circle-info mr-1"></i>Tap the card for full details</p>' +
+                    '<div class="grid grid-cols-4 gap-2 mt-3 pt-2 border-t border-white/10">' +
+                        '<button data-action="interest" class="action-btn flex flex-col items-center gap-1 group">' +
+                            '<div class="w-12 h-12 rounded-full bg-rose-600/90 text-white flex items-center justify-center text-lg shadow-lg group-active:scale-95 transition"><i class="fa-regular fa-envelope-open"></i></div>' +
+                            '<span class="text-[11px] font-medium text-slate-200">Interest</span></button>' +
+                        '<button data-action="shortlist" class="action-btn flex flex-col items-center gap-1 group">' +
+                            '<div class="w-12 h-12 rounded-full bg-amber-500/90 text-white flex items-center justify-center text-lg shadow-lg group-active:scale-95 transition"><i class="fa-regular fa-star"></i></div>' +
+                            '<span class="text-[11px] font-medium text-slate-200">Shortlist</span></button>' +
+                        '<button data-action="ignore" class="action-btn flex flex-col items-center gap-1 group">' +
+                            '<div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center text-lg shadow-lg group-active:scale-95 transition"><i class="fa-solid fa-xmark"></i></div>' +
+                            '<span class="text-[11px] font-medium text-slate-200">Ignore</span></button>' +
+                        '<button data-action="chat" class="action-btn flex flex-col items-center gap-1 group">' +
+                            '<div class="w-12 h-12 rounded-full bg-sky-500/90 text-white flex items-center justify-center text-lg shadow-lg group-active:scale-95 transition"><i class="fa-regular fa-comment-dots"></i></div>' +
+                            '<span class="text-[11px] font-medium text-slate-200">Chat</span></button>' +
+                    '</div>' +
+                '</div>';
+
+            attachSwipeEvents(card, profile);
+            return card;
+        }
+
+        function renderStack() {
+            stackContainer.innerHTML = '';
+            var deck = remainingProfiles();
+
+            if (deck.length === 0) {
+                orangeWrapper.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
+                return;
+            }
+            orangeWrapper.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+            emptyState.classList.remove('flex');
+
+            if (deck[1]) {
+                var nextCard = createCardElement(deck[1]);
+                nextCard.style.transform = 'scale(0.95) translateY(10px)';
+                nextCard.style.opacity = '0.7';
+                nextCard.style.pointerEvents = 'none';
+                stackContainer.appendChild(nextCard);
+            }
+            var currentCard = createCardElement(deck[0]);
+            stackContainer.appendChild(currentCard);
+        }
+
+        function attachSwipeEvents(card, profile) {
+            var startX = 0, startY = 0, currentX = 0, isDragging = false, startTime = 0;
+            var likeStamp = card.querySelector('.stamp-like');
+            var nopeStamp = card.querySelector('.stamp-nope');
+
+            function onStart(e) {
+                if (e.target.closest && e.target.closest('.action-btn')) return;
+                isDragging = true;
+                startTime = Date.now();
+                var pt = e.type.indexOf('touch') !== -1 ? e.touches[0] : e;
+                startX = pt.clientX; startY = pt.clientY; currentX = startX;
+                card.classList.add('swiping');
+            }
+            function onMove(e) {
+                if (!isDragging) return;
+                var pt = e.type.indexOf('touch') !== -1 ? e.touches[0] : e;
+                currentX = pt.clientX;
+                var diffX = currentX - startX;
+                var diffY = (pt.clientY - startY);
+                if (Math.abs(diffX) > Math.abs(diffY) && e.cancelable) { /* horizontal gesture */ }
+                card.style.transform = 'translateX(' + diffX + 'px) rotate(' + (diffX * 0.08) + 'deg)';
+                likeStamp.style.opacity = diffX > 40 ? Math.min(1, (diffX - 40) / 80) : 0;
+                nopeStamp.style.opacity = diffX < -40 ? Math.min(1, (-diffX - 40) / 80) : 0;
+            }
+            function onEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                card.classList.remove('swiping');
+                var diffX = currentX - startX;
+                var elapsed = Date.now() - startTime;
+                likeStamp.style.opacity = 0;
+                nopeStamp.style.opacity = 0;
+
+                if (Math.abs(diffX) > 100) {
+                    if (diffX > 0) doAction('interest', profile, card, true);
+                    else doAction('ignore', profile, card, true);
+                } else if (Math.abs(diffX) < 8 && elapsed < 300) {
+                    // tap -> open details
+                    card.style.transform = 'translateX(0) rotate(0deg)';
+                    openDetail(profile);
+                } else {
+                    card.style.transform = 'translateX(0) rotate(0deg)';
+                }
+            }
+
+            card.addEventListener('mousedown', onStart);
+            card.addEventListener('mousemove', onMove);
+            card.addEventListener('mouseup', onEnd);
+            card.addEventListener('mouseleave', onEnd);
+            card.addEventListener('touchstart', onStart, { passive: true });
+            card.addEventListener('touchmove', onMove, { passive: true });
+            card.addEventListener('touchend', onEnd);
+        }
+
+        function swipeOut(card, direction, done) {
+            card.style.transform = 'translateX(' + (direction * (window.innerWidth || 500)) + 'px) rotate(' + (direction * 30) + 'deg)';
+            card.style.opacity = '0';
+            setTimeout(function () { if (done) done(); }, 220);
+        }
+
+        /* ---------------- Actions ---------------- */
+        function doAction(type, profile, card, fromSwipe) {
+            if (type === 'interest') {
+                interests.add(profile.id); acted.add(profile.id); saveState();
+                toast('Interest sent to ' + profile.name);
+                swipeOut(card, 1, renderStack);
+            } else if (type === 'shortlist') {
+                if (shortlist.has(profile.id)) { shortlist.delete(profile.id); toast(profile.name + ' removed from shortlist'); }
+                else { shortlist.add(profile.id); toast(profile.name + ' added to shortlist'); }
+                acted.add(profile.id); saveState(); refreshBadges();
+                swipeOut(card, 1, renderStack);
+            } else if (type === 'ignore') {
+                ignored.add(profile.id); acted.add(profile.id); saveState();
+                toast('Ignored ' + profile.name);
+                swipeOut(card, -1, renderStack);
+            } else if (type === 'chat') {
+                goToChat(profile);
+            }
+        }
+
+        function goToChat(profile) {
+            acted.add(profile.id); saveState();
+            openThread(profile.name, profile.image, 'Hi, I liked your profile. Would you like to connect?');
+        }
+
+        // Card action buttons (delegated)
+        stackContainer.addEventListener('click', function (e) {
+            var btn = e.target.closest('.action-btn');
+            if (!btn) return;
+            e.stopPropagation();
+            var card = btn.closest('.swipe-card');
+            if (!card) return;
+            var profile = profileById(parseInt(card.dataset.id, 10));
+            if (!profile) return;
+            // Ignore clicks on the background preview card
+            if (card.style.pointerEvents === 'none') return;
+            doAction(btn.getAttribute('data-action'), profile, card, false);
+        });
+
+        /* ---------------- Profile Detail ---------------- */
+        function detailRow(icon, label, value) {
+            return '<div class="flex items-start gap-3 py-3 border-b border-slate-100">' +
+                '<i class="' + icon + ' text-slate-400 mt-0.5 w-4 text-center"></i>' +
+                '<div><p class="text-[11px] uppercase tracking-wide text-slate-400 font-semibold">' + label + '</p>' +
+                '<p class="text-sm text-slate-800 font-medium">' + value + '</p></div></div>';
+        }
+
+        function openDetail(profile) {
+            var isShort = shortlist.has(profile.id);
+            var html =
+                '<div class="relative">' +
+                    '<img src="' + profile.image + '" alt="' + profile.name + '" class="w-full h-64 object-cover" />' +
+                    '<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>' +
+                    '<div class="absolute bottom-0 p-4 text-white">' +
+                        '<h2 class="text-2xl font-bold flex items-center gap-2">' + profile.name + ', ' + profile.age +
+                            (profile.verified ? '<i class="fa-solid fa-circle-check text-sky-400 text-lg"></i>' : '') + '</h2>' +
+                        '<p class="text-sm text-slate-200">' + profile.profession + '</p>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="px-4">' +
+                    '<div class="flex items-center gap-2 py-3 flex-wrap">' +
+                        profile.badges.map(function (b) { return '<span class="bg-rose-50 text-rose-700 text-[11px] font-bold px-2.5 py-1 rounded-full">' + b + '</span>'; }).join('') +
+                        '<span class="bg-slate-100 text-slate-600 text-[11px] font-semibold px-2.5 py-1 rounded-full"><i class="fa-regular fa-images mr-1"></i>' + profile.photosCount + ' photos</span>' +
+                    '</div>' +
+                    '<p class="text-sm text-slate-600 leading-relaxed pb-3 border-b border-slate-100">' + profile.about + '</p>' +
+                    '<div class="pt-1">' +
+                        detailRow('fa-solid fa-ruler-vertical', 'Height', profile.height) +
+                        detailRow('fa-solid fa-location-dot', 'Location', profile.location) +
+                        detailRow('fa-solid fa-hands-praying', 'Community', profile.caste) +
+                        detailRow('fa-solid fa-briefcase', 'Profession', profile.profession) +
+                        detailRow('fa-solid fa-indian-rupee-sign', 'Income', profile.income) +
+                        detailRow('fa-solid fa-graduation-cap', 'Education', profile.education) +
+                        detailRow('fa-regular fa-gem', 'Marital Status', profile.maritalStatus) +
+                        detailRow('fa-solid fa-utensils', 'Diet', profile.diet) +
+                        detailRow('fa-solid fa-wine-glass', 'Drinking', profile.drink) +
+                        detailRow('fa-solid fa-smoking', 'Smoking', profile.smoke) +
+                        detailRow('fa-solid fa-people-roof', 'Family', profile.family) +
+                        detailRow('fa-solid fa-user-shield', 'Managed By', profile.managedBy) +
+                        detailRow('fa-regular fa-clock', 'Last Active', profile.lastActive) +
+                    '</div>' +
+                '</div>' +
+                '<div class="sticky bottom-0 bg-white border-t border-slate-100 p-3 grid grid-cols-4 gap-2">' +
+                    '<button data-detail-action="interest" class="flex flex-col items-center gap-1"><div class="w-11 h-11 rounded-full bg-rose-600 text-white flex items-center justify-center text-lg"><i class="fa-regular fa-envelope-open"></i></div><span class="text-[11px] text-slate-600">Interest</span></button>' +
+                    '<button data-detail-action="shortlist" class="flex flex-col items-center gap-1"><div class="w-11 h-11 rounded-full ' + (isShort ? 'bg-amber-500' : 'bg-slate-200') + ' text-white flex items-center justify-center text-lg"><i class="fa-' + (isShort ? 'solid' : 'regular') + ' fa-star"></i></div><span class="text-[11px] text-slate-600">' + (isShort ? 'Shortlisted' : 'Shortlist') + '</span></button>' +
+                    '<button data-detail-action="ignore" class="flex flex-col items-center gap-1"><div class="w-11 h-11 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-lg"><i class="fa-solid fa-xmark"></i></div><span class="text-[11px] text-slate-600">Ignore</span></button>' +
+                    '<button data-detail-action="chat" class="flex flex-col items-center gap-1"><div class="w-11 h-11 rounded-full bg-sky-500 text-white flex items-center justify-center text-lg"><i class="fa-regular fa-comment-dots"></i></div><span class="text-[11px] text-slate-600">Chat</span></button>' +
+                '</div>';
+
+            document.getElementById('detail-body').innerHTML = html;
+            var body = document.getElementById('detail-body');
+            body.querySelectorAll('[data-detail-action]').forEach(function (b) {
+                b.addEventListener('click', function () {
+                    var a = b.getAttribute('data-detail-action');
+                    if (a === 'chat') { goToChat(profile); return; }
+                    if (a === 'shortlist') {
+                        if (shortlist.has(profile.id)) { shortlist.delete(profile.id); toast(profile.name + ' removed from shortlist'); }
+                        else { shortlist.add(profile.id); toast(profile.name + ' added to shortlist'); }
+                        saveState(); refreshBadges(); openDetail(profile);
+                        return;
+                    }
+                    if (a === 'interest') { interests.add(profile.id); acted.add(profile.id); saveState(); toast('Interest sent to ' + profile.name); }
+                    if (a === 'ignore') { ignored.add(profile.id); acted.add(profile.id); saveState(); toast('Ignored ' + profile.name); }
+                    closeModal('detail-modal');
+                    renderStack();
+                });
+            });
+            openModal('detail-modal');
+        }
+
+        /* ---------------- Messages ---------------- */
+        function renderMessages() {
+            var list = document.getElementById('messages-list');
+            if (!clientMessages.length) {
+                list.innerHTML = '<div class="text-center py-16 px-8"><div class="w-16 h-16 mx-auto rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-2xl mb-3"><i class="fa-regular fa-bell"></i></div><p class="text-slate-700 font-semibold">No messages yet</p><p class="text-slate-400 text-sm mt-1">Messages from other members will show up here.</p></div>';
+                return;
+            }
+            list.innerHTML = clientMessages.map(function (m) {
+                var unread = !readMsgs.has(m.id);
+                return '<button data-msg-id="' + m.id + '" data-msg-name="' + m.name + '" data-msg-avatar="' + m.avatar + '" data-msg-client="' + m.clientId + '" data-msg-text="' + String(m.text).replace(/"/g, '&quot;') + '" ' +
+                    'class="w-full text-left flex items-center gap-3 px-4 py-3.5 hover:bg-slate-50 ' + (unread ? 'bg-rose-50/40' : '') + '">' +
+                    '<div class="relative flex-shrink-0">' +
+                        '<img src="' + m.avatar + '" class="w-12 h-12 rounded-full object-cover" alt="">' +
+                        (unread ? '<span class="absolute top-0 right-0 w-3 h-3 bg-rose-500 border-2 border-white rounded-full"></span>' : '') +
+                    '</div>' +
+                    '<div class="flex-1 min-w-0">' +
+                        '<div class="flex items-center justify-between gap-2">' +
+                            '<span class="font-semibold text-slate-800 truncate ' + (unread ? '' : 'font-medium') + '">' + m.name + '</span>' +
+                            '<span class="text-[11px] text-slate-400 flex-shrink-0">' + m.time + '</span>' +
+                        '</div>' +
+                        '<p class="text-sm text-slate-500 truncate ' + (unread ? 'font-medium text-slate-700' : '') + '">' + m.text + '</p>' +
+                    '</div>' +
+                    '<i class="fa-solid fa-chevron-right text-slate-300 text-xs"></i>' +
+                '</button>';
+            }).join('');
+
+            list.querySelectorAll('[data-msg-id]').forEach(function (row) {
+                row.addEventListener('click', function () {
+                    readMsgs.add(row.getAttribute('data-msg-id'));
+                    saveState(); refreshBadges();
+                    var name = row.getAttribute('data-msg-name');
+                    var avatar = row.getAttribute('data-msg-avatar');
+                    var txt = row.getAttribute('data-msg-text') || '';
+                    openThread(name, avatar, txt);
+                });
+            });
+        }
+
+        function openMessages() {
+            renderMessages();
+            openModal('messages-modal');
+        }
+
+        document.getElementById('mark-all-read').addEventListener('click', function () {
+            clientMessages.forEach(function (m) { readMsgs.add(m.id); });
+            saveState(); refreshBadges(); renderMessages();
+            toast('All messages marked as read');
+        });
+
+        /* ---------------- Shortlist ---------------- */
+        function renderShortlist() {
+            var list = document.getElementById('shortlist-list');
+            var ids = Array.from(shortlist);
+            if (ids.length === 0) {
+                list.innerHTML = '<div class="flex flex-col items-center justify-center text-center py-20 px-8">' +
+                    '<div class="w-16 h-16 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-2xl mb-3"><i class="fa-regular fa-star"></i></div>' +
+                    '<p class="text-slate-700 font-semibold">Your shortlist is empty</p>' +
+                    '<p class="text-slate-400 text-sm mt-1">Tap the star on any match to save them here.</p></div>';
+                return;
+            }
+            list.innerHTML = ids.map(function (id) {
+                var p = profileById(id);
+                if (!p) return '';
+                return '<div class="flex items-center gap-3 px-4 py-3.5 border-b border-slate-100">' +
+                    '<img src="' + p.image + '" class="w-12 h-12 rounded-full object-cover flex-shrink-0" alt="">' +
+                    '<div class="flex-1 min-w-0">' +
+                        '<p class="font-semibold text-slate-800 truncate">' + p.name + ', ' + p.age + '</p>' +
+                        '<p class="text-xs text-slate-500 truncate">' + p.location + '</p>' +
+                    '</div>' +
+                    '<button data-sl-chat="' + p.id + '" class="w-9 h-9 rounded-full bg-sky-500 text-white flex items-center justify-center text-sm" title="Chat"><i class="fa-regular fa-comment-dots"></i></button>' +
+                    '<button data-sl-remove="' + p.id + '" class="w-9 h-9 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm" title="Remove"><i class="fa-solid fa-xmark"></i></button>' +
+                '</div>';
+            }).join('');
+
+            list.querySelectorAll('[data-sl-chat]').forEach(function (b) {
+                b.addEventListener('click', function () { goToChat(profileById(parseInt(b.getAttribute('data-sl-chat'), 10))); });
+            });
+            list.querySelectorAll('[data-sl-remove]').forEach(function (b) {
+                b.addEventListener('click', function () {
+                    var id = parseInt(b.getAttribute('data-sl-remove'), 10);
+                    shortlist.delete(id); saveState(); refreshBadges(); renderShortlist();
+                    toast('Removed from shortlist');
+                });
+            });
+        }
+
+        function openShortlist() { renderShortlist(); openModal('shortlist-modal'); }
+
+        /* ---------------- Merged chat (from 0008) ---------------- */
+        var recentChats = [];
+        var onlineUsers = [];
+
+        function renderChatList() {
+            var accounts = {};
+            try { accounts = JSON.parse(localStorage.getItem('bj_accounts')) || {}; } catch (e) {}
+            var me = '';
+            try { me = ((JSON.parse(localStorage.getItem('bj_profile')) || {}).email || '').toLowerCase(); } catch (e) {}
+
+            var online = [], recent = [];
+            Object.keys(accounts).forEach(function (k) {
+                if (k === me) return;
+                var p = accounts[k] || {};
+                var nm = [p.firstName, p.lastName].filter(Boolean).join(' ') || 'Member';
+                online.push({ name: nm, avatar: p.photo || '' });
+                var tk = 'bj_thread_' + nm.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+                var msgs = null; try { msgs = JSON.parse(localStorage.getItem(tk)); } catch (e) {}
+                if (msgs && msgs.length) {
+                    var last = msgs[msgs.length - 1];
+                    recent.push({ name: nm, avatar: p.photo || '', last: last.text, time: last.time, unread: 0 });
+                }
+            });
+
+            var onlineRow = document.getElementById('chat-online-row');
+            var recentList = document.getElementById('chat-recent-list');
+            function av(u, cls) {
+                return u.avatar ? '<img src="' + u.avatar + '" class="' + cls + '" alt="">'
+                  : '<div class="' + cls + '" style="display:flex;align-items:center;justify-content:center;background:#e2e8f0;color:#64748b;font-weight:700">' + u.name.charAt(0).toUpperCase() + '</div>';
+            }
+            if (!online.length) {
+                onlineRow.innerHTML = '<p style="color:#94a3b8;font-size:13px;padding:4px 2px">No one is online right now.</p>';
+            } else {
+                onlineRow.innerHTML = online.map(function (u) {
+                    return '<div class="online-person"><div class="av">' + av(u, 'av-img') + '<div class="dot"></div></div><span>' + u.name + '</span></div>';
+                }).join('');
+            }
+            if (!recent.length) {
+                recentList.innerHTML = '<div class="text-center py-14"><div class="w-16 h-16 mx-auto rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-2xl mb-3"><i class="fa-regular fa-comments"></i></div><p class="text-slate-700 font-semibold">No chats yet</p><p class="text-slate-400 text-sm mt-1">A chat appears here when a member messages you.</p></div>';
+                return;
+            }
+            recentList.innerHTML = recent.map(function (c, i) {
+                return '<div class="chat-row" data-chat-idx="' + i + '">' + av(c, 'av-img-round') +
+                    '<div class="meta"><div class="top"><span class="nm">' + c.name + '</span><span class="tm">' + (c.time || '') + '</span></div>' +
+                    '<div class="bot"><span class="lm">' + c.last + '</span></div></div></div>';
+            }).join('');
+            recentList.querySelectorAll('[data-chat-idx]').forEach(function (el) {
+                el.addEventListener('click', function () {
+                    var c = recent[parseInt(el.getAttribute('data-chat-idx'), 10)];
+                    openThread(c.name, c.avatar, '');
+                });
+            });
+        }
+
+        function openChatView() { renderChatList(); openModal('chat-view'); }
+
+        var currentThread = null;
+
+        function nowTime() {
+            var d = new Date(), h = d.getHours(), m = d.getMinutes(), ap = h >= 12 ? 'PM' : 'AM';
+            h = h % 12; if (h === 0) h = 12;
+            return h + ':' + (m < 10 ? '0' + m : m) + ' ' + ap;
+        }
+        function threadKey(n) { return 'bj_thread_' + n.replace(/[^a-z0-9]/gi, '_').toLowerCase(); }
+        function escapeHtml(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+        function loadThread(name, seed) {
+            var ms = store.get(threadKey(name), null);
+            if (!ms) { ms = []; if (seed) ms.push({ from: 'them', text: seed, time: '2:43 PM' }); store.set(threadKey(name), ms); }
+            return ms;
+        }
+        function renderThread() {
+            if (!currentThread) return;
+            var ms = loadThread(currentThread.name, currentThread.seed);
+            var box = document.getElementById('thread-msgs');
+            if (ms.length === 0) {
+                box.innerHTML = '<p style="text-align:center;color:#94a3b8;font-size:13px;margin-top:20px">Say hello to ' + escapeHtml(currentThread.name) + '</p>';
+                return;
+            }
+            box.innerHTML = ms.map(function (m) {
+                return '<div class="bub ' + (m.from === 'me' ? 'me' : 'them') + '">' + escapeHtml(m.text) + '<span class="t">' + m.time + '</span></div>';
+            }).join('');
+            box.scrollTop = box.scrollHeight;
+        }
+        function openThread(name, avatar, seed) {
+            currentThread = { name: name, avatar: avatar, seed: seed };
+            document.getElementById('thread-name').textContent = name;
+            document.getElementById('thread-avatar').src = avatar || '';
+            renderThread();
+            openModal('thread-view');
+            setTimeout(function () { var i = document.getElementById('thread-input'); if (i) i.focus(); }, 100);
+        }
+        function sendThread() {
+            var inp = document.getElementById('thread-input');
+            var text = inp.value.trim();
+            if (!text || !currentThread) return;
+            var ms = loadThread(currentThread.name, currentThread.seed);
+            ms.push({ from: 'me', text: text, time: nowTime() });
+            store.set(threadKey(currentThread.name), ms);
+            inp.value = ''; renderThread();
+            setTimeout(function () {
+                var m2 = loadThread(currentThread.name, currentThread.seed);
+                m2.push({ from: 'them', text: 'Thank you for your message. Let us connect!', time: nowTime() });
+                store.set(threadKey(currentThread.name), m2);
+                renderThread();
+            }, 1200);
+        }
+        document.getElementById('thread-send').addEventListener('click', sendThread);
+        document.getElementById('thread-input').addEventListener('keydown', function (e) { if (e.key === 'Enter') sendThread(); });
+        document.getElementById('thread-back').addEventListener('click', function () { closeModal('thread-view'); });
+
+        /* ---------------- Wiring ---------------- */
+        document.getElementById('open-account-btn').addEventListener('click', function () { openModal('account-modal'); });
+        document.getElementById('open-search-btn').addEventListener('click', function () { openModal('search-modal'); });
+        document.getElementById('open-messages-btn').addEventListener('click', openMessages);
+        document.getElementById('open-shortlist-btn').addEventListener('click', openShortlist);
+        document.getElementById('acct-shortlist').addEventListener('click', function () { closeModal('account-modal'); openShortlist(); });
+        document.getElementById('acct-messages').addEventListener('click', function () { closeModal('account-modal'); openMessages(); });
+        document.getElementById('empty-shortlist-btn').addEventListener('click', openShortlist);
+        document.getElementById('show-profiles-btn').addEventListener('click', function () { closeModal('search-modal'); toast('Showing matches for your criteria'); });
+        document.getElementById('ask-jia-btn').addEventListener('click', function () { toast('JIA is finding handpicked matches for you...'); });
+
+        // Filter chips toggle
+        document.querySelectorAll('.chip').forEach(function (chip) {
+            chip.addEventListener('click', function () { chip.classList.toggle('active-filter'); });
+        });
+
+        // Reset
+        document.getElementById('reset-btn').addEventListener('click', function () {
+            acted.clear(); ignored.clear();
+            saveState(); refreshBadges(); renderStack();
+            toast('Showing all profiles again');
+        });
+
+        // Quick search filters the deck live by name/location/profession
+        var quickSearch = document.getElementById('quick-search');
+        quickSearch.addEventListener('input', function () {
+            var q = quickSearch.value.trim().toLowerCase();
+            stackContainer.innerHTML = '';
+            var deck = remainingProfiles().filter(function (p) {
+                if (!q) return true;
+                return (p.name + ' ' + p.location + ' ' + p.profession + ' ' + p.caste).toLowerCase().indexOf(q) !== -1;
+            });
+            if (deck.length === 0) {
+                orangeWrapper.classList.add('hidden');
+                emptyState.classList.remove('hidden'); emptyState.classList.add('flex');
+                return;
+            }
+            orangeWrapper.classList.remove('hidden');
+            emptyState.classList.add('hidden'); emptyState.classList.remove('flex');
+            if (deck[1]) {
+                var nc = createCardElement(deck[1]); nc.style.transform = 'scale(0.95) translateY(10px)'; nc.style.opacity = '0.7'; nc.style.pointerEvents = 'none';
+                stackContainer.appendChild(nc);
+            }
+            stackContainer.appendChild(createCardElement(deck[0]));
+        });
+
+        // Bottom navigation
+        document.querySelectorAll('[data-nav]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var n = btn.getAttribute('data-nav');
+                if (n === 'matches') { closeAllModals(); window.scrollTo(0, 0); }
+                else if (n === 'activity') { openMessages(); }
+                else if (n === 'messenger') { openChatView(); }
+                else if (n === 'upgrade') { if (window.bjOpenUpgrade) window.bjOpenUpgrade(); }
+            });
+        });
+
+        /* ---------------- Init ---------------- */
+        window.addEventListener('load', function () {
+            renderStack();
+            refreshBadges();
+        });
+    })();
+    
+    </script>
+
+    <!-- ================= Complete / Edit Profile (all information) ================= -->
+    <div id="bjProfileForm" style="display:none; position:fixed; inset:0; z-index:130; background:#f1f5f9; overflow-y:auto;">
+      <div class="max-w-2xl mx-auto pb-24">
+        <div class="bg-white px-4 py-3 border-b flex items-center gap-3 sticky top-0 z-20">
+          <button id="pf-close" class="text-slate-700 hover:text-slate-900 text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+          <h2 id="pf-title" class="text-lg font-bold text-slate-800">Complete Your Profile</h2>
+          <span id="pf-required-note" class="ml-auto text-[11px] text-rose-600 font-semibold"></span>
+        </div>
+        <p class="px-4 pt-3 text-xs text-slate-500">Fill in your details. Fields marked by the note above are needed to finish your profile.</p>
+        <div class="p-4 space-y-4"><div class="bg-white rounded-2xl border border-slate-200 p-4 flex items-center gap-4"><div class="w-20 h-20 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center flex-shrink-0"><img id="pf-photo-img" alt="" class="w-full h-full object-cover" style="display:none;"><i id="pf-photo-ph" class="fa-solid fa-user text-3xl text-slate-400"></i></div><div class="min-w-0"><p class="text-sm font-bold text-slate-800">Profile photo</p><p class="text-xs text-slate-500 mb-2">Add a clear, recent photo of yourself.</p><label class="inline-flex items-center gap-2 bg-rose-50 text-rose-700 text-xs font-bold px-3 py-2 rounded-xl cursor-pointer"><i class="fa-solid fa-camera"></i> Upload photo<input id="pf-photo-input" type="file" accept="image/*" class="hidden"></label><button id="pf-photo-remove" type="button" class="ml-2 text-xs text-slate-500 underline">Remove</button></div></div><div class="bg-white rounded-2xl border border-slate-200 p-4"><h3 class="text-sm font-bold text-slate-800 mb-3">Basic Details</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Profile created for</label><select id="pf_profileFor" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Myself">Myself</option><option value="Son">Son</option><option value="Daughter">Daughter</option><option value="Brother">Brother</option><option value="Sister">Sister</option><option value="Relative/Friend">Relative/Friend</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Gender</label><select id="pf_gender" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Male">Male</option><option value="Female">Female</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">First name</label><input id="pf_firstName" type="text" placeholder="First name" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Last name</label><input id="pf_lastName" type="text" placeholder="Last name" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Date of birth (DD/MM/YYYY)</label><input id="pf_dob" type="text" placeholder="Date of birth (DD/MM/YYYY)" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Mobile number</label><input id="pf_phone" type="tel" placeholder="Mobile number" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Email</label><input id="pf_email" type="email" placeholder="Email" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div></div></div><div class="bg-white rounded-2xl border border-slate-200 p-4"><h3 class="text-sm font-bold text-slate-800 mb-3">Lifestyle</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Marital status</label><select id="pf_maritalStatus" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Never Married">Never Married</option><option value="Married">Married</option><option value="Divorced">Divorced</option><option value="Widow">Widow</option><option value="Awaiting Divorce">Awaiting Divorce</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Height</label><select id="pf_height" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="4' 0"">4' 0"</option><option value="4' 1"">4' 1"</option><option value="4' 2"">4' 2"</option><option value="4' 3"">4' 3"</option><option value="4' 4"">4' 4"</option><option value="4' 5"">4' 5"</option><option value="4' 6"">4' 6"</option><option value="4' 7"">4' 7"</option><option value="4' 8"">4' 8"</option><option value="4' 9"">4' 9"</option><option value="4' 10"">4' 10"</option><option value="4' 11"">4' 11"</option><option value="5' 0"">5' 0"</option><option value="5' 1"">5' 1"</option><option value="5' 2"">5' 2"</option><option value="5' 3"">5' 3"</option><option value="5' 4"">5' 4"</option><option value="5' 5"">5' 5"</option><option value="5' 6"">5' 6"</option><option value="5' 7"">5' 7"</option><option value="5' 8"">5' 8"</option><option value="5' 9"">5' 9"</option><option value="5' 10"">5' 10"</option><option value="5' 11"">5' 11"</option><option value="6' 0"">6' 0"</option><option value="6' 1"">6' 1"</option><option value="6' 2"">6' 2"</option><option value="6' 3"">6' 3"</option><option value="6' 4"">6' 4"</option><option value="6' 5"">6' 5"</option><option value="6' 6"">6' 6"</option><option value="6' 7"">6' 7"</option><option value="6' 8"">6' 8"</option><option value="6' 9"">6' 9"</option><option value="6' 10"">6' 10"</option><option value="6' 11"">6' 11"</option><option value="7' 0"">7' 0"</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Diet</label><select id="pf_diet" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Vegetarian">Vegetarian</option><option value="Non-Vegetarian">Non-Vegetarian</option><option value="Eggetarian">Eggetarian</option><option value="Vegan">Vegan</option><option value="Jain">Jain</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Complexion</label><select id="pf_complexion" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Fair">Fair</option><option value="Wheatish">Wheatish</option><option value="Wheatish Brown">Wheatish Brown</option><option value="Dark">Dark</option><option value="Doesn't Matter">Doesn't Matter</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Ethnicity</label><input id="pf_ethnicity" type="text" placeholder="Ethnicity" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Drinking</label><select id="pf_drink" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Never">Never</option><option value="Yes">Yes</option><option value="Occasionally">Occasionally</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Smoking</label><select id="pf_smoke" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Never">Never</option><option value="Yes">Yes</option><option value="Occasionally">Occasionally</option></select></div></div></div></div><div class="bg-white rounded-2xl border border-slate-200 p-4"><h3 class="text-sm font-bold text-slate-800 mb-3">Religion & Community</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Religion</label><select id="pf_religion" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Hindu">Hindu</option><option value="Muslim">Muslim</option><option value="Christian">Christian</option><option value="Sikh">Sikh</option><option value="Buddhist">Buddhist</option><option value="Jain">Jain</option><option value="Jewish">Jewish</option><option value="Parsi (Zoroastrian)">Parsi (Zoroastrian)</option><option value="Bahai">Bahai</option><option value="Shinto">Shinto</option><option value="Taoist">Taoist</option><option value="Confucian">Confucian</option><option value="Tribal / Animist">Tribal / Animist</option><option value="Spiritual (not religious)">Spiritual (not religious)</option><option value="Atheist">Atheist</option><option value="Agnostic">Agnostic</option><option value="Other">Other</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Caste / Community</label><input id="pf_community" list="pf_community_list" type="text" placeholder="Caste / Community" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><datalist id="pf_community_list"><option value="Brahmin"></option><option value="Kanyakubja Brahmin"></option><option value="Saryuparin Brahmin"></option><option value="Maithil Brahmin"></option><option value="Saraswat Brahmin"></option><option value="Gaur Brahmin"></option><option value="Chitpavan Brahmin"></option><option value="Deshastha Brahmin"></option><option value="Iyer"></option><option value="Iyengar"></option><option value="Namboodiri"></option><option value="Nagar Brahmin"></option><option value="Audichya Brahmin"></option><option value="Pandit"></option><option value="Shukla"></option><option value="Tiwari"></option><option value="Trivedi"></option><option value="Chaturvedi"></option><option value="Dwivedi"></option><option value="Pathak"></option><option value="Shastri"></option><option value="Joshi"></option><option value="Kayastha"></option><option value="Khatri"></option><option value="Arora"></option><option value="Sood"></option><option value="Bania / Vaishya"></option><option value="Agarwal"></option><option value="Maheshwari"></option><option value="Oswal"></option><option value="Khandelwal"></option><option value="Jain"></option><option value="Shwetambar Jain"></option><option value="Digambar Jain"></option><option value="Porwal"></option><option value="Mahajan"></option><option value="Gupta"></option><option value="Seth"></option><option value="Rajput"></option><option value="Thakur"></option><option value="Chauhan"></option><option value="Rathore"></option><option value="Sisodiya"></option><option value="Solanki"></option><option value="Parmar"></option><option value="Parihar"></option><option value="Tomar"></option><option value="Kachhwaha"></option><option value="Bais"></option><option value="Raghuvanshi"></option><option value="Yadav"></option><option value="Ahir"></option><option value="Jat"></option><option value="Gujjar / Gurjar"></option><option value="Maratha"></option><option value="Kunbi"></option><option value="Patil"></option><option value="Deshmukh"></option><option value="Shinde"></option><option value="Pawar"></option><option value="Bhosale"></option><option value="Jadhav"></option><option value="Reddy"></option><option value="Rao"></option><option value="Naidu"></option><option value="Kamma"></option><option value="Kapu"></option><option value="Vokkaliga"></option><option value="Gowda"></option><option value="Lingayat"></option><option value="Vanniyar"></option><option value="Thevar"></option><option value="Mudaliar"></option><option value="Chettiar"></option><option value="Nadar"></option><option value="Pillai"></option><option value="Menon"></option><option value="Nair"></option><option value="Ezhava"></option><option value="Thiyya"></option><option value="Kongu Vellalar"></option><option value="Kshatriya"></option><option value="Vaishya"></option><option value="Shudra"></option><option value="Saini"></option><option value="Kushwaha"></option><option value="Koiri"></option><option value="Kurmi"></option><option value="Yadav (Ahir)"></option><option value="Prajapati"></option><option value="Kumhar"></option><option value="Lohar"></option><option value="Nai / Barber"></option><option value="Teli"></option><option value="Kalwar"></option><option value="Halwai"></option><option value="Sonar"></option><option value="Sunar"></option><option value="Jaiswal"></option><option value="Barnwal"></option><option value="Rastogi"></option><option value="Srivastava"></option><option value="Nigam"></option><option value="Saxena"></option><option value="Mathur"></option><option value="Marwari"></option><option value="Bohra"></option><option value="Khoja"></option><option value="Memon"></option><option value="Sunni"></option><option value="Shia"></option><option value="Sheikh"></option><option value="Syed"></option><option value="Pathan"></option><option value="Khan"></option><option value="Ansari"></option><option value="Qureshi"></option><option value="Momin"></option><option value="Siddiqui"></option><option value="Malik"></option><option value="Mirza"></option><option value="Jat Sikh"></option><option value="Ramgarhia"></option><option value="Ahluwalia"></option><option value="Bhatia"></option><option value="Lubana"></option><option value="Tarkhan"></option><option value="Chamar"></option><option value="Jatav"></option><option value="Ravidasia"></option><option value="Valmiki"></option><option value="Balmiki"></option><option value="Pasi"></option><option value="Dhobi"></option><option value="Kori"></option><option value="Bansphor"></option><option value="Dom"></option><option value="Mochi"></option><option value="Bhil"></option><option value="Gond"></option><option value="Santhal"></option><option value="Oraon"></option><option value="Munda"></option><option value="Toda"></option><option value="Warli"></option><option value="Meena"></option><option value="Banjara"></option><option value="Lambadi"></option><option value="Nishad"></option><option value="Kewat"></option><option value="Mallah"></option><option value="Gaderia"></option><option value="Bishnoi"></option><option value="Sikh (general)"></option><option value="Christian (general)"></option><option value="Anglo-Indian"></option><option value="Parsi"></option><option value="Buddhist (general)"></option><option value="Lad"></option><option value="Lingayat"></option><option value="Vishwakarma"></option><option value="Panchal"></option><option value="Achari"></option><option value="Shilpkar"></option><option value="Darzi"></option><option value="Julaha"></option><option value="Khatik"></option><option value="Sikligar"></option><option value="Beldar"></option><option value="Kumbhar"></option><option value="Rajbhar"></option><option value="Bhar"></option><option value="Prajapati (Kumhar)"></option><option value="Tanti"></option><option value="Kosta"></option><option value="Koshti"></option><option value="Devanga"></option><option value="Padmashali"></option><option value="Sale"></option><option value="Sali"></option><option value="Kaikadi"></option><option value="Bedar"></option><option value="Ramoshi"></option><option value="Mang"></option><option value="Mahar"></option><option value="Chambhar"></option><option value="Holar"></option><option value="Dhor"></option><option value="Matang"></option><option value="Balmiki (Chuhra)"></option><option value="Other"></option></datalist></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Gotra</label><input id="pf_subCommunity" list="pf_subCommunity_list" type="text" placeholder="Gotra" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><datalist id="pf_subCommunity_list"><option value="Brahmin"></option><option value="Kanyakubja Brahmin"></option><option value="Saryuparin Brahmin"></option><option value="Maithil Brahmin"></option><option value="Saraswat Brahmin"></option><option value="Gaur Brahmin"></option><option value="Chitpavan Brahmin"></option><option value="Deshastha Brahmin"></option><option value="Iyer"></option><option value="Iyengar"></option><option value="Namboodiri"></option><option value="Nagar Brahmin"></option><option value="Audichya Brahmin"></option><option value="Pandit"></option><option value="Shukla"></option><option value="Tiwari"></option><option value="Trivedi"></option><option value="Chaturvedi"></option><option value="Dwivedi"></option><option value="Pathak"></option><option value="Shastri"></option><option value="Joshi"></option><option value="Kayastha"></option><option value="Khatri"></option><option value="Arora"></option><option value="Sood"></option><option value="Bania / Vaishya"></option><option value="Agarwal"></option><option value="Maheshwari"></option><option value="Oswal"></option><option value="Khandelwal"></option><option value="Jain"></option><option value="Shwetambar Jain"></option><option value="Digambar Jain"></option><option value="Porwal"></option><option value="Mahajan"></option><option value="Gupta"></option><option value="Seth"></option><option value="Rajput"></option><option value="Thakur"></option><option value="Chauhan"></option><option value="Rathore"></option><option value="Sisodiya"></option><option value="Solanki"></option><option value="Parmar"></option><option value="Parihar"></option><option value="Tomar"></option><option value="Kachhwaha"></option><option value="Bais"></option><option value="Raghuvanshi"></option><option value="Yadav"></option><option value="Ahir"></option><option value="Jat"></option><option value="Gujjar / Gurjar"></option><option value="Maratha"></option><option value="Kunbi"></option><option value="Patil"></option><option value="Deshmukh"></option><option value="Shinde"></option><option value="Pawar"></option><option value="Bhosale"></option><option value="Jadhav"></option><option value="Reddy"></option><option value="Rao"></option><option value="Naidu"></option><option value="Kamma"></option><option value="Kapu"></option><option value="Vokkaliga"></option><option value="Gowda"></option><option value="Lingayat"></option><option value="Vanniyar"></option><option value="Thevar"></option><option value="Mudaliar"></option><option value="Chettiar"></option><option value="Nadar"></option><option value="Pillai"></option><option value="Menon"></option><option value="Nair"></option><option value="Ezhava"></option><option value="Thiyya"></option><option value="Kongu Vellalar"></option><option value="Kshatriya"></option><option value="Vaishya"></option><option value="Shudra"></option><option value="Saini"></option><option value="Kushwaha"></option><option value="Koiri"></option><option value="Kurmi"></option><option value="Yadav (Ahir)"></option><option value="Prajapati"></option><option value="Kumhar"></option><option value="Lohar"></option><option value="Nai / Barber"></option><option value="Teli"></option><option value="Kalwar"></option><option value="Halwai"></option><option value="Sonar"></option><option value="Sunar"></option><option value="Jaiswal"></option><option value="Barnwal"></option><option value="Rastogi"></option><option value="Srivastava"></option><option value="Nigam"></option><option value="Saxena"></option><option value="Mathur"></option><option value="Marwari"></option><option value="Bohra"></option><option value="Khoja"></option><option value="Memon"></option><option value="Sunni"></option><option value="Shia"></option><option value="Sheikh"></option><option value="Syed"></option><option value="Pathan"></option><option value="Khan"></option><option value="Ansari"></option><option value="Qureshi"></option><option value="Momin"></option><option value="Siddiqui"></option><option value="Malik"></option><option value="Mirza"></option><option value="Jat Sikh"></option><option value="Ramgarhia"></option><option value="Ahluwalia"></option><option value="Bhatia"></option><option value="Lubana"></option><option value="Tarkhan"></option><option value="Chamar"></option><option value="Jatav"></option><option value="Ravidasia"></option><option value="Valmiki"></option><option value="Balmiki"></option><option value="Pasi"></option><option value="Dhobi"></option><option value="Kori"></option><option value="Bansphor"></option><option value="Dom"></option><option value="Mochi"></option><option value="Bhil"></option><option value="Gond"></option><option value="Santhal"></option><option value="Oraon"></option><option value="Munda"></option><option value="Toda"></option><option value="Warli"></option><option value="Meena"></option><option value="Banjara"></option><option value="Lambadi"></option><option value="Nishad"></option><option value="Kewat"></option><option value="Mallah"></option><option value="Gaderia"></option><option value="Bishnoi"></option><option value="Sikh (general)"></option><option value="Christian (general)"></option><option value="Anglo-Indian"></option><option value="Parsi"></option><option value="Buddhist (general)"></option><option value="Lad"></option><option value="Lingayat"></option><option value="Vishwakarma"></option><option value="Panchal"></option><option value="Achari"></option><option value="Shilpkar"></option><option value="Darzi"></option><option value="Julaha"></option><option value="Khatik"></option><option value="Sikligar"></option><option value="Beldar"></option><option value="Kumbhar"></option><option value="Rajbhar"></option><option value="Bhar"></option><option value="Prajapati (Kumhar)"></option><option value="Tanti"></option><option value="Kosta"></option><option value="Koshti"></option><option value="Devanga"></option><option value="Padmashali"></option><option value="Sale"></option><option value="Sali"></option><option value="Kaikadi"></option><option value="Bedar"></option><option value="Ramoshi"></option><option value="Mang"></option><option value="Mahar"></option><option value="Chambhar"></option><option value="Holar"></option><option value="Dhor"></option><option value="Matang"></option><option value="Balmiki (Chuhra)"></option><option value="Other"></option></datalist></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Mother tongue</label><select id="pf_motherTongue" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Hindi">Hindi</option><option value="Awadhi">Awadhi</option><option value="Bhojpuri">Bhojpuri</option><option value="Maithili">Maithili</option><option value="Magahi">Magahi</option><option value="Braj">Braj</option><option value="Haryanvi">Haryanvi</option><option value="Rajasthani / Marwari">Rajasthani / Marwari</option><option value="Punjabi">Punjabi</option><option value="Gujarati">Gujarati</option><option value="Marathi">Marathi</option><option value="Konkani">Konkani</option><option value="Bengali">Bengali</option><option value="Assamese">Assamese</option><option value="Odia">Odia</option><option value="Tamil">Tamil</option><option value="Telugu">Telugu</option><option value="Kannada">Kannada</option><option value="Malayalam">Malayalam</option><option value="Tulu">Tulu</option><option value="Urdu">Urdu</option><option value="Sindhi">Sindhi</option><option value="Kashmiri">Kashmiri</option><option value="Dogri">Dogri</option><option value="Nepali">Nepali</option><option value="Santali">Santali</option><option value="Bodo">Bodo</option><option value="Manipuri">Manipuri</option><option value="Gondi">Gondi</option><option value="English">English</option><option value="Other">Other</option></select></div></div></div></div><div class="bg-white rounded-2xl border border-slate-200 p-4"><h3 class="text-sm font-bold text-slate-800 mb-3">Location</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Country</label><select id="pf_country" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Afghanistan">Afghanistan</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Brazil">Brazil</option><option value="Brunei">Brunei</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Cape Verde">Cape Verde</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Congo">Congo</option><option value="Costa Rica">Costa Rica</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Cyprus">Cyprus</option><option value="Czech Republic">Czech Republic</option><option value="Denmark">Denmark</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Eswatini">Eswatini</option><option value="Ethiopia">Ethiopia</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Greece">Greece</option><option value="Grenada">Grenada</option><option value="Guatemala">Guatemala</option><option value="Guinea">Guinea</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Honduras">Honduras</option><option value="Hong Kong">Hong Kong</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indonesia">Indonesia</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Ivory Coast">Ivory Coast</option><option value="Jamaica">Jamaica</option><option value="Japan">Japan</option><option value="Jordan">Jordan</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kiribati">Kiribati</option><option value="Kosovo">Kosovo</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mexico">Mexico</option><option value="Micronesia">Micronesia</option><option value="Moldova">Moldova</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar">Myanmar</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="North Korea">North Korea</option><option value="North Macedonia">North Macedonia</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Palestine">Palestine</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Qatar">Qatar</option><option value="Romania">Romania</option><option value="Russia">Russia</option><option value="Rwanda">Rwanda</option><option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option><option value="Saint Lucia">Saint Lucia</option><option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Korea">South Korea</option><option value="South Sudan">South Sudan</option><option value="Spain">Spain</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syria">Syria</option><option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania">Tanzania</option><option value="Thailand">Thailand</option><option value="Timor-Leste">Timor-Leste</option><option value="Togo">Togo</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option value="United States">United States</option><option value="Uruguay">Uruguay</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Vatican City">Vatican City</option><option value="Venezuela">Venezuela</option><option value="Vietnam">Vietnam</option><option value="Yemen">Yemen</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">State</label><select id="pf_state" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Andhra Pradesh">Andhra Pradesh</option><option value="Arunachal Pradesh">Arunachal Pradesh</option><option value="Assam">Assam</option><option value="Bihar">Bihar</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Goa">Goa</option><option value="Gujarat">Gujarat</option><option value="Haryana">Haryana</option><option value="Himachal Pradesh">Himachal Pradesh</option><option value="Jharkhand">Jharkhand</option><option value="Karnataka">Karnataka</option><option value="Kerala">Kerala</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Maharashtra">Maharashtra</option><option value="Manipur">Manipur</option><option value="Meghalaya">Meghalaya</option><option value="Mizoram">Mizoram</option><option value="Nagaland">Nagaland</option><option value="Odisha">Odisha</option><option value="Punjab">Punjab</option><option value="Rajasthan">Rajasthan</option><option value="Sikkim">Sikkim</option><option value="Tamil Nadu">Tamil Nadu</option><option value="Telangana">Telangana</option><option value="Tripura">Tripura</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Uttarakhand">Uttarakhand</option><option value="West Bengal">West Bengal</option><option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option><option value="Chandigarh">Chandigarh</option><option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option><option value="Delhi">Delhi</option><option value="Jammu and Kashmir">Jammu and Kashmir</option><option value="Ladakh">Ladakh</option><option value="Lakshadweep">Lakshadweep</option><option value="Puducherry">Puducherry</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">City</label><select id="pf_city" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option></select></div></div></div></div><div class="bg-white rounded-2xl border border-slate-200 p-4"><h3 class="text-sm font-bold text-slate-800 mb-3">Education & Career</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Education</label><select id="pf_education" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="10th / Matric">10th / Matric</option><option value="12th / Intermediate">12th / Intermediate</option><option value="Diploma">Diploma</option><option value="ITI">ITI</option><option value="B.A">B.A</option><option value="B.Com">B.Com</option><option value="B.Sc">B.Sc</option><option value="B.Tech / B.E">B.Tech / B.E</option><option value="BBA">BBA</option><option value="BCA">BCA</option><option value="B.Arch">B.Arch</option><option value="B.Pharm">B.Pharm</option><option value="B.Ed">B.Ed</option><option value="LLB">LLB</option><option value="MBBS">MBBS</option><option value="BDS">BDS</option><option value="BAMS">BAMS</option><option value="BHMS">BHMS</option><option value="B.V.Sc">B.V.Sc</option><option value="B.Des">B.Des</option><option value="BHM">BHM</option><option value="B.Sc Nursing">B.Sc Nursing</option><option value="GNM">GNM</option><option value="M.A">M.A</option><option value="M.Com">M.Com</option><option value="M.Sc">M.Sc</option><option value="M.Tech / M.E">M.Tech / M.E</option><option value="MBA">MBA</option><option value="MCA">MCA</option><option value="M.Arch">M.Arch</option><option value="M.Pharm">M.Pharm</option><option value="M.Ed">M.Ed</option><option value="LLM">LLM</option><option value="MD">MD</option><option value="MS">MS</option><option value="MDS">MDS</option><option value="M.V.Sc">M.V.Sc</option><option value="M.Des">M.Des</option><option value="CA">CA</option><option value="CS">CS</option><option value="ICWA / CMA">ICWA / CMA</option><option value="CFA">CFA</option><option value="PhD">PhD</option><option value="Post-Doctoral">Post-Doctoral</option><option value="Other">Other</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Profession</label><select id="pf_profession" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Private Job">Private Job</option><option value="Government Job">Government Job</option><option value="Business">Business</option><option value="Self Employed">Self Employed</option><option value="Doctor">Doctor</option><option value="Engineer">Engineer</option><option value="Software / IT Professional">Software / IT Professional</option><option value="Teacher / Professor">Teacher / Professor</option><option value="Lawyer / Legal">Lawyer / Legal</option><option value="Chartered Accountant">Chartered Accountant</option><option value="Banker">Banker</option><option value="Defence / Armed Forces">Defence / Armed Forces</option><option value="Police / Civil Services">Police / Civil Services</option><option value="Scientist / Research">Scientist / Research</option><option value="Architect">Architect</option><option value="Designer">Designer</option><option value="Chef">Chef</option><option value="Pilot">Pilot</option><option value="Farmer / Agriculture">Farmer / Agriculture</option><option value="Artist / Media">Artist / Media</option><option value="Student">Student</option><option value="Not Working">Not Working</option><option value="Retired">Retired</option><option value="Others">Others</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Annual income</label><select id="pf_income" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Below Rs 3 Lakh">Below Rs 3 Lakh</option><option value="Rs 3 - 5 Lakh">Rs 3 - 5 Lakh</option><option value="Rs 5 - 10 Lakh">Rs 5 - 10 Lakh</option><option value="Rs 10 - 15 Lakh">Rs 10 - 15 Lakh</option><option value="Rs 15 - 25 Lakh">Rs 15 - 25 Lakh</option><option value="Rs 25 - 50 Lakh">Rs 25 - 50 Lakh</option><option value="Rs 50 Lakh - 1 Crore">Rs 50 Lakh - 1 Crore</option><option value="Above Rs 1 Crore">Above Rs 1 Crore</option><option value="Prefer not to say">Prefer not to say</option></select></div></div></div></div><div class="bg-white rounded-2xl border border-slate-200 p-4"><h3 class="text-sm font-bold text-slate-800 mb-3">Family Details</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Family status</label><select id="pf_familyStatus" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Middle Class">Middle Class</option><option value="Upper Middle Class">Upper Middle Class</option><option value="Rich">Rich</option><option value="Affluent">Affluent</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Father&#39;s name</label><input id="pf_fatherName" type="text" placeholder="Father&#39;s name" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Father&#39;s occupation</label><input id="pf_fatherOccupation" type="text" placeholder="Father&#39;s occupation" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Mother&#39;s name</label><input id="pf_motherName" type="text" placeholder="Mother&#39;s name" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Mother&#39;s occupation</label><input id="pf_motherOccupation" type="text" placeholder="Mother&#39;s occupation" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Brother&#39;s name</label><input id="pf_brotherName" type="text" placeholder="Brother&#39;s name" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Sister&#39;s name</label><input id="pf_sisterName" type="text" placeholder="Sister&#39;s name" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></div></div></div></div><div class="bg-white rounded-2xl border border-slate-200 p-4"><h3 class="text-sm font-bold text-slate-800 mb-3">About You</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class="sm:col-span-2"><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">About</label><textarea id="pf_about" rows="4" placeholder="Write a few lines..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"></textarea></div></div></div></div><div class="bg-white rounded-2xl border border-slate-200 p-4"><h3 class="text-sm font-bold text-slate-800 mb-3">Partner Preferences</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Preferred marital status</label><select id="pf_prefMarital" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Never Married">Never Married</option><option value="Married">Married</option><option value="Divorced">Divorced</option><option value="Widow">Widow</option><option value="Doesn't Matter">Doesn't Matter</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Preferred religion</label><select id="pf_prefReligion" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Hindu">Hindu</option><option value="Muslim">Muslim</option><option value="Christian">Christian</option><option value="Sikh">Sikh</option><option value="Buddhist">Buddhist</option><option value="Jain">Jain</option><option value="Jewish">Jewish</option><option value="Parsi (Zoroastrian)">Parsi (Zoroastrian)</option><option value="Bahai">Bahai</option><option value="Shinto">Shinto</option><option value="Taoist">Taoist</option><option value="Confucian">Confucian</option><option value="Tribal / Animist">Tribal / Animist</option><option value="Spiritual (not religious)">Spiritual (not religious)</option><option value="Atheist">Atheist</option><option value="Agnostic">Agnostic</option><option value="Other">Other</option><option value="Doesn't Matter">Doesn't Matter</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Preferred education</label><select id="pf_prefEducation" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="10th / Matric">10th / Matric</option><option value="12th / Intermediate">12th / Intermediate</option><option value="Diploma">Diploma</option><option value="ITI">ITI</option><option value="B.A">B.A</option><option value="B.Com">B.Com</option><option value="B.Sc">B.Sc</option><option value="B.Tech / B.E">B.Tech / B.E</option><option value="BBA">BBA</option><option value="BCA">BCA</option><option value="B.Arch">B.Arch</option><option value="B.Pharm">B.Pharm</option><option value="B.Ed">B.Ed</option><option value="LLB">LLB</option><option value="MBBS">MBBS</option><option value="BDS">BDS</option><option value="BAMS">BAMS</option><option value="BHMS">BHMS</option><option value="B.V.Sc">B.V.Sc</option><option value="B.Des">B.Des</option><option value="BHM">BHM</option><option value="B.Sc Nursing">B.Sc Nursing</option><option value="GNM">GNM</option><option value="M.A">M.A</option><option value="M.Com">M.Com</option><option value="M.Sc">M.Sc</option><option value="M.Tech / M.E">M.Tech / M.E</option><option value="MBA">MBA</option><option value="MCA">MCA</option><option value="M.Arch">M.Arch</option><option value="M.Pharm">M.Pharm</option><option value="M.Ed">M.Ed</option><option value="LLM">LLM</option><option value="MD">MD</option><option value="MS">MS</option><option value="MDS">MDS</option><option value="M.V.Sc">M.V.Sc</option><option value="M.Des">M.Des</option><option value="CA">CA</option><option value="CS">CS</option><option value="ICWA / CMA">ICWA / CMA</option><option value="CFA">CFA</option><option value="PhD">PhD</option><option value="Post-Doctoral">Post-Doctoral</option><option value="Other">Other</option><option value="Doesn't Matter">Doesn't Matter</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Preferred country</label><select id="pf_prefCountry" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Afghanistan">Afghanistan</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Brazil">Brazil</option><option value="Brunei">Brunei</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Cape Verde">Cape Verde</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Congo">Congo</option><option value="Costa Rica">Costa Rica</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Cyprus">Cyprus</option><option value="Czech Republic">Czech Republic</option><option value="Denmark">Denmark</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Eswatini">Eswatini</option><option value="Ethiopia">Ethiopia</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Greece">Greece</option><option value="Grenada">Grenada</option><option value="Guatemala">Guatemala</option><option value="Guinea">Guinea</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Honduras">Honduras</option><option value="Hong Kong">Hong Kong</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indonesia">Indonesia</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Ivory Coast">Ivory Coast</option><option value="Jamaica">Jamaica</option><option value="Japan">Japan</option><option value="Jordan">Jordan</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kiribati">Kiribati</option><option value="Kosovo">Kosovo</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mexico">Mexico</option><option value="Micronesia">Micronesia</option><option value="Moldova">Moldova</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar">Myanmar</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="North Korea">North Korea</option><option value="North Macedonia">North Macedonia</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Palestine">Palestine</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Qatar">Qatar</option><option value="Romania">Romania</option><option value="Russia">Russia</option><option value="Rwanda">Rwanda</option><option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option><option value="Saint Lucia">Saint Lucia</option><option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Korea">South Korea</option><option value="South Sudan">South Sudan</option><option value="Spain">Spain</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syria">Syria</option><option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania">Tanzania</option><option value="Thailand">Thailand</option><option value="Timor-Leste">Timor-Leste</option><option value="Togo">Togo</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option value="United States">United States</option><option value="Uruguay">Uruguay</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Vatican City">Vatican City</option><option value="Venezuela">Venezuela</option><option value="Vietnam">Vietnam</option><option value="Yemen">Yemen</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option><option value="Doesn't Matter">Doesn't Matter</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Preferred drinking</label><select id="pf_prefDrinking" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Never">Never</option><option value="Yes">Yes</option><option value="Occasionally">Occasionally</option><option value="Doesn't Matter">Doesn't Matter</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Preferred smoking</label><select id="pf_prefSmoking" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="Never">Never</option><option value="Yes">Yes</option><option value="Occasionally">Occasionally</option><option value="Doesn't Matter">Doesn't Matter</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Preferred age from</label><select id="pf_ageFrom" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option><option value="60">60</option><option value="61">61</option><option value="62">62</option><option value="63">63</option><option value="64">64</option><option value="65">65</option><option value="66">66</option><option value="67">67</option><option value="68">68</option><option value="69">69</option><option value="70">70</option><option value="71">71</option><option value="72">72</option><option value="73">73</option><option value="74">74</option><option value="75">75</option><option value="76">76</option><option value="77">77</option><option value="78">78</option><option value="79">79</option><option value="80">80</option><option value="81">81</option><option value="82">82</option><option value="83">83</option><option value="84">84</option><option value="85">85</option><option value="86">86</option><option value="87">87</option><option value="88">88</option><option value="89">89</option><option value="90">90</option></select></div></div><div class=""><div><label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Preferred age to</label><select id="pf_ageTo" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:border-rose-400"><option value="">Select</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option><option value="60">60</option><option value="61">61</option><option value="62">62</option><option value="63">63</option><option value="64">64</option><option value="65">65</option><option value="66">66</option><option value="67">67</option><option value="68">68</option><option value="69">69</option><option value="70">70</option><option value="71">71</option><option value="72">72</option><option value="73">73</option><option value="74">74</option><option value="75">75</option><option value="76">76</option><option value="77">77</option><option value="78">78</option><option value="79">79</option><option value="80">80</option><option value="81">81</option><option value="82">82</option><option value="83">83</option><option value="84">84</option><option value="85">85</option><option value="86">86</option><option value="87">87</option><option value="88">88</option><option value="89">89</option><option value="90">90</option></select></div></div></div></div></div>
+        <div class="fixed bottom-0 left-0 right-0 bg-white border-t p-3 flex gap-2 max-w-2xl mx-auto">
+          <button id="pf-cancel" class="px-5 py-3 rounded-xl bg-slate-100 text-slate-700 font-bold text-sm">Cancel</button>
+          <button id="pf-save" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 rounded-xl text-sm">Save Profile</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    (function () {
+      'use strict';
+      var KEY = 'bj_profile';
+      var KEYS = ["profileFor", "gender", "firstName", "lastName", "dob", "phone", "email", "maritalStatus", "height", "diet", "complexion", "ethnicity", "drink", "smoke", "religion", "community", "subCommunity", "motherTongue", "country", "state", "city", "education", "profession", "income", "familyStatus", "fatherName", "fatherOccupation", "motherName", "motherOccupation", "brotherName", "sisterName", "about", "prefMarital", "prefReligion", "prefEducation", "prefCountry", "prefDrinking", "prefSmoking", "ageFrom", "ageTo"];
+      var REQUIRED = ['firstName','lastName','gender','dob','religion','community','maritalStatus','height','city','country','education','profession'];
+
+      function get() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+      function set(o) { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} }
+      function gv(id) { var el = document.getElementById(id); return el ? String(el.value || '').trim() : ''; }
+      function radio(name) { var r = document.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : ''; }
+      function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
+      function isComplete(p) { for (var i = 0; i < REQUIRED.length; i++) { if (!p[REQUIRED[i]]) return false; } return true; }
+      function newId() { return 'FS' + Math.floor(10000000 + Math.random() * 89999999); }
+
+      function toast(msg) {
+        var t = document.getElementById('toast');
+        if (!t) return;
+        t.textContent = msg; t.classList.add('show');
+        setTimeout(function () { t.classList.remove('show'); }, 1900);
+      }
+
+      function collectFromRegistration() {
+        return {
+          profileFor: radio('profileFor'), gender: radio('gender'),
+          firstName: gv('firstName'), lastName: gv('lastName'),
+          dob: [gv('dobDay'), gv('dobMonth'), gv('dobYear')].filter(Boolean).join('/'),
+          email: gv('email'),
+          maritalStatus: gv('maritalStatus'), height: gv('height'),
+          diet: radio('diet'), complexion: gv('complexion'), ethnicity: gv('ethnicity'),
+          drink: gv('drink'), smoke: gv('smoke'),
+          religion: gv('religion'), community: gv('community'), subCommunity: gv('subCommunity'),
+          country: gv('country'), state: gv('state'), city: gv('city'),
+          familyStatus: gv('familyStatus'),
+          fatherName: gv('fatherName'), fatherOccupation: gv('fatherOccupation'),
+          motherName: gv('motherName'), motherOccupation: gv('motherOccupation'),
+          brotherName: gv('brotherName'), sisterName: gv('sisterName'),
+          about: gv('introText'),
+          prefMarital: gv('prefMarital'), prefReligion: gv('prefReligion'), prefEducation: gv('prefEducation'),
+          prefCountry: gv('prefCountry'), prefDrinking: gv('prefDrinking'), prefSmoking: gv('prefSmoking'),
+          ageFrom: gv('ageFrom'), ageTo: gv('ageTo')
+        };
+      }
+
+      window.bjSaveFromRegistration = function () {
+        var p = get(), c = collectFromRegistration();
+        for (var k in c) { if (c[k]) p[k] = c[k]; }
+        if (!p.id) p.id = newId();
+        set(p); saveAccount(p);
+      };
+
+      function fillForm(p) {
+        KEYS.forEach(function (k) { var el = document.getElementById('pf_' + k); if (el) el.value = p[k] || ''; });
+        applyPhoto(p);
+        fillCities(true);
+      }
+      function readForm() {
+        var o = {};
+        KEYS.forEach(function (k) { var el = document.getElementById('pf_' + k); if (el) o[k] = String(el.value || '').trim(); });
+        return o;
+      }
+
+      function openForm(title) {
+        var p = get();
+        fillForm(p);
+        document.getElementById('pf-title').textContent = title || (isComplete(p) ? 'Edit Profile' : 'Complete Your Profile');
+        document.getElementById('pf-required-note').textContent = isComplete(p) ? '' : 'You can fill these later too';
+        var cancelBtn = document.getElementById('pf-cancel');
+        if (cancelBtn) cancelBtn.textContent = isComplete(p) ? 'Cancel' : 'Skip for now';
+        document.getElementById('bjProfileForm').style.display = 'block';
+        document.getElementById('bjProfileForm').scrollTop = 0;
+        document.body.style.overflow = 'hidden';
+      }
+      function closeForm() {
+        document.getElementById('bjProfileForm').style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      function row(label, val) {
+        if (!val) return '';
+        return '<div class="flex justify-between gap-3 py-1.5 border-b border-slate-100"><span class="text-slate-500 text-xs">' + label +
+               '</span><span class="text-slate-800 text-xs font-medium text-right">' + esc(val) + '</span></div>';
+      }
+      function card(title, rows) {
+        var body = rows.map(function (r) { return row(r[0], r[1]); }).join('');
+        if (!body) return '';
+        return '<div class="bg-white rounded-2xl border border-slate-200 p-4 mb-3"><h3 class="text-sm font-bold text-slate-800 mb-2">' + title + '</h3>' + body + '</div>';
+      }
+
+      function renderAccount() {
+        var p = get();
+        applyPhoto(p);
+        var nameEl = document.getElementById('acct-name'), idEl = document.getElementById('acct-id'), box = document.getElementById('acct-details');
+        if (!nameEl || !box) return;
+        var full = [p.firstName, p.lastName].filter(Boolean).join(' ');
+        nameEl.textContent = full || 'Your Profile';
+        idEl.textContent = p.id ? '(' + p.id + ')' : '';
+        var tick = document.getElementById('acct-tick');
+        if (tick) tick.style.display = p.verified ? 'inline-block' : 'none';
+        var typeEl = document.getElementById('acct-type');
+        if (typeEl) typeEl.textContent = isPremium(p) ? 'Premium Account' : 'Local Account';
+        var planEl = document.getElementById('acct-plan');
+        if (planEl) planEl.textContent = p.plan ? (p.plan + ' Plan') : 'Exclusive 1-Month Free';
+
+        if (!isComplete(p)) {
+          box.innerHTML = '<div class="text-center py-4"><p class="text-slate-600 text-sm mb-3">Your profile is not complete yet.</p>' +
+            '<button id="acct-fill-now" class="bg-rose-600 text-white text-sm font-bold px-4 py-2 rounded-xl">Fill your details</button></div>';
+          var b = document.getElementById('acct-fill-now');
+          if (b) b.addEventListener('click', function () {
+            document.getElementById('account-modal').classList.add('hidden');
+            document.getElementById('account-modal').classList.remove('flex');
+            openForm('Complete Your Profile');
+          });
+          return;
+        }
+
+        var html = '';
+        html += card('Basic Details', [['Profile for', p.profileFor], ['Gender', p.gender], ['Name', full], ['Date of birth', p.dob], ['Mobile', p.phone], ['Email', p.email]]);
+        html += card('Lifestyle', [['Marital status', p.maritalStatus], ['Height', p.height], ['Diet', p.diet], ['Complexion', p.complexion], ['Ethnicity', p.ethnicity], ['Drinking', p.drink], ['Smoking', p.smoke]]);
+        html += card('Religion & Location', [['Religion', p.religion], ['Community', p.community], ['Sub-community', p.subCommunity], ['Mother tongue', p.motherTongue], ['Country', p.country], ['State', p.state], ['City', p.city]]);
+        html += card('Education & Career', [['Education', p.education], ['Profession', p.profession], ['Income', p.income]]);
+        html += card('Family Details', [['Family status', p.familyStatus], ['Father', [p.fatherName, p.fatherOccupation].filter(Boolean).join(' - ')], ['Mother', [p.motherName, p.motherOccupation].filter(Boolean).join(' - ')], ['Brother', p.brotherName], ['Sister', p.sisterName]]);
+        html += card('About', [['About', p.about]]);
+        html += card('Partner Preferences', [['Marital status', p.prefMarital], ['Religion', p.prefReligion], ['Education', p.prefEducation], ['Country', p.prefCountry], ['Drinking', p.prefDrinking], ['Smoking', p.prefSmoking], ['Age', (p.ageFrom && p.ageTo) ? (p.ageFrom + ' - ' + p.ageTo + ' yrs') : '']]);
+        box.innerHTML = html;
+      }
+
+      function leaveForm() {
+        if (!isComplete(get())) toast('You can complete your profile anytime from My Account');
+        closeForm();
+        renderAccount();
+      }
+      document.getElementById('pf-close').addEventListener('click', leaveForm);
+      document.getElementById('pf-cancel').addEventListener('click', leaveForm);
+      document.getElementById('pf-save').addEventListener('click', function () {
+        var p = get(), f = readForm();
+        for (var k in f) p[k] = f[k];
+        if (!p.id) p.id = newId();
+        set(p); saveAccount(p);
+        closeForm(); renderAccount();
+        if (!isComplete(p)) toast('Saved. You can finish the rest anytime.');
+        else toast('Profile saved successfully');
+      });
+
+      function getAccounts() { try { return JSON.parse(localStorage.getItem('bj_accounts')) || {}; } catch (e) { return {}; } }
+      function setAccounts(o) { try { localStorage.setItem('bj_accounts', JSON.stringify(o)); } catch (e) {} }
+      function accountKey(p) { return ((p && (p.email || p.phone)) || '').toLowerCase().trim(); }
+      function pushProfile(p) {
+        try {
+          var base = window.BJ_BACKEND;
+          if (!base || !p || (!p.email && !p.phone)) return;
+          fetch(base + '/save-profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ profile: p })
+          }).catch(function () {});
+        } catch (e) {}
+      }
+      function saveAccount(p) {
+        var k = accountKey(p); if (!k) return;
+        var a = getAccounts(); a[k] = p; setAccounts(a);
+        pushProfile(p);
+      }
+      function isPremium(p) { return p.accountType === 'premium'; }
+      var TOP_PLANS = ['Platinum Plus', 'Shaadi Select VIP', 'VIP Shaadi Elite', 'Global Match NRI'];
+
+      window.bjMarkPaid = function (plan) {
+        var p = get();
+        p.accountType = 'premium';
+        p.plan = plan || p.plan || '';
+        if (TOP_PLANS.indexOf(p.plan) !== -1) p.verified = true;
+        set(p); saveAccount(p); renderAccount();
+      };
+
+      window.bjOpenEditProfile = function () { openForm('Edit Profile'); };
+      window.bjAfterLogin = function (key) {
+        key = (key || '').toLowerCase().trim();
+        var accounts = getAccounts();
+        if (key && accounts[key]) {
+          set(accounts[key]);
+          closeForm();
+          renderAccount();
+          toast('Welcome back!');
+          return;
+        }
+        if (!isComplete(get())) { openForm('Complete Your Profile'); }
+        else { saveAccount(get()); renderAccount(); }
+      };
+
+      function applyPhoto(p) {
+        var img = document.getElementById('pf-photo-img'), ph = document.getElementById('pf-photo-ph');
+        if (img && ph) {
+          if (p.photo) { img.src = p.photo; img.style.display = 'block'; ph.style.display = 'none'; }
+          else { img.removeAttribute('src'); img.style.display = 'none'; ph.style.display = 'block'; }
+        }
+        var ai = document.getElementById('acct-photo'), ap = document.getElementById('acct-photo-ph');
+        if (ai && ap) {
+          if (p.photo) { ai.src = p.photo; ai.style.display = 'block'; ap.style.display = 'none'; }
+          else { ai.removeAttribute('src'); ai.style.display = 'none'; ap.style.display = 'block'; }
+        }
+      }
+      var photoInput = document.getElementById('pf-photo-input');
+      if (photoInput) {
+        photoInput.addEventListener('change', function () {
+          var f = photoInput.files && photoInput.files[0];
+          if (!f) return;
+          if (f.size > 2 * 1024 * 1024) { toast('Please choose an image under 2 MB'); photoInput.value = ''; return; }
+          var r = new FileReader();
+          r.onload = function () { var p = get(); p.photo = r.result; set(p); applyPhoto(p); toast('Photo updated'); };
+          r.readAsDataURL(f);
+        });
+      }
+      var photoRemove = document.getElementById('pf-photo-remove');
+      if (photoRemove) {
+        photoRemove.addEventListener('click', function () {
+          var p = get(); delete p.photo; set(p); applyPhoto(p);
+          if (photoInput) photoInput.value = '';
+          toast('Photo removed');
+        });
+      }
+      var photoBtn = document.getElementById('acct-photo-btn');
+      if (photoBtn) photoBtn.addEventListener('click', function () { window.bjOpenEditProfile(); });
+
+      var CITIES = {"Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", "Tirupati", "Rajahmundry", "Kakinada", "Anantapur", "Kadapa", "Chittoor", "Eluru"], "Arunachal Pradesh": ["Itanagar", "Naharlagun", "Pasighat", "Tawang", "Ziro", "Bomdila", "Tezu", "Along"], "Assam": ["Guwahati", "Silchar", "Dibrugarh", "Jorhat", "Nagaon", "Tinsukia", "Tezpur", "Bongaigaon", "Dhubri", "Goalpara"], "Bihar": ["Patna", "Gaya", "Bhagalpur", "Muzaffarpur", "Darbhanga", "Purnia", "Arrah", "Begusarai", "Katihar", "Munger", "Chapra", "Saharsa"], "Chhattisgarh": ["Raipur", "Bhilai", "Bilaspur", "Korba", "Durg", "Rajnandgaon", "Jagdalpur", "Ambikapur", "Raigarh", "Dhamtari"], "Goa": ["Panaji", "Margao", "Vasco da Gama", "Mapusa", "Ponda", "Calangute", "Bicholim", "Curchorem"], "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar", "Jamnagar", "Gandhinagar", "Anand", "Junagadh", "Gandhidham", "Navsari", "Morbi"], "Haryana": ["Faridabad", "Gurugram", "Panipat", "Ambala", "Yamunanagar", "Rohtak", "Hisar", "Karnal", "Sonipat", "Panchkula", "Bhiwani", "Sirsa"], "Himachal Pradesh": ["Shimla", "Manali", "Dharamshala", "Solan", "Mandi", "Kullu", "Baddi", "Palampur", "Una", "Bilaspur"], "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Deoghar", "Hazaribagh", "Giridih", "Ramgarh", "Medininagar", "Phusro"], "Karnataka": ["Bengaluru", "Mysuru", "Mangaluru", "Hubballi", "Belagavi", "Kalaburagi", "Davanagere", "Ballari", "Vijayapura", "Shivamogga", "Tumakuru", "Udupi"], "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Kollam", "Palakkad", "Alappuzha", "Kannur", "Kottayam", "Malappuram", "Kasaragod", "Idukki"], "Madhya Pradesh": ["Indore", "Bhopal", "Jabalpur", "Gwalior", "Ujjain", "Sagar", "Satna", "Rewa", "Ratlam", "Dewas", "Singrauli", "Katni"], "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Thane", "Aurangabad", "Navi Mumbai", "Solapur", "Kolhapur", "Amravati", "Nanded", "Sangli"], "Manipur": ["Imphal", "Thoubal", "Bishnupur", "Churachandpur", "Kakching", "Ukhrul", "Senapati", "Chandel"], "Meghalaya": ["Shillong", "Tura", "Nongstoin", "Jowai", "Baghmara", "Williamnagar", "Cherrapunji", "Nongpoh"], "Mizoram": ["Aizawl", "Lunglei", "Champhai", "Serchhip", "Kolasib", "Saiha", "Lawngtlai", "Mamit"], "Nagaland": ["Kohima", "Dimapur", "Mokokchung", "Tuensang", "Wokha", "Zunheboto", "Mon", "Phek"], "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Sambalpur", "Berhampur", "Puri", "Balasore", "Bhadrak", "Baripada", "Jharsuguda"], "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda", "Mohali", "Hoshiarpur", "Pathankot", "Moga", "Phagwara", "Firozpur", "Barnala"], "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Ajmer", "Bikaner", "Bhilwara", "Alwar", "Sikar", "Bharatpur", "Pali", "Sri Ganganagar"], "Sikkim": ["Gangtok", "Namchi", "Gyalshing", "Mangan", "Jorethang", "Rangpo", "Singtam", "Pelling"], "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Salem", "Tirunelveli", "Erode", "Vellore", "Thoothukudi", "Tiruppur", "Dindigul", "Thanjavur"], "Telangana": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar", "Khammam", "Ramagundam", "Mahbubnagar", "Nalgonda", "Adilabad", "Suryapet", "Siddipet"], "Tripura": ["Agartala", "Udaipur", "Dharmanagar", "Kailashahar", "Belonia", "Khowai", "Ambassa", "Teliamura"], "Uttar Pradesh": ["Lucknow", "Kanpur", "Ghaziabad", "Agra", "Varanasi", "Meerut", "Noida", "Prayagraj", "Bareilly", "Aligarh", "Moradabad", "Gorakhpur", "Jhansi", "Ayodhya"], "Uttarakhand": ["Dehradun", "Haridwar", "Roorkee", "Haldwani", "Rishikesh", "Rudrapur", "Kashipur", "Nainital", "Mussoorie", "Kotdwar"], "West Bengal": ["Kolkata", "Howrah", "Durgapur", "Asansol", "Siliguri", "Bardhaman", "Malda", "Kharagpur", "Jalpaiguri", "Kalyani", "Baharampur"], "Andaman and Nicobar Islands": ["Port Blair", "Car Nicobar", "Havelock", "Neil Island"], "Chandigarh": ["Chandigarh"], "Dadra and Nagar Haveli and Daman and Diu": ["Silvassa", "Daman", "Diu"], "Delhi": ["New Delhi", "Delhi", "Noida", "Gurugram", "Faridabad", "Ghaziabad", "Dwarka", "Rohini", "Saket"], "Jammu and Kashmir": ["Srinagar", "Jammu", "Anantnag", "Baramulla", "Udhampur", "Kathua", "Sopore", "Ganderbal"], "Ladakh": ["Leh", "Kargil", "Nubra", "Zanskar"], "Lakshadweep": ["Kavaratti", "Agatti", "Minicoy", "Amini"], "Puducherry": ["Puducherry", "Karaikal", "Mahe", "Yanam"]};
+      function fillCities(keep) {
+        var s = document.getElementById('pf_state'), c = document.getElementById('pf_city');
+        if (!s || !c) return;
+        var cur = keep ? c.value : '';
+        c.innerHTML = '<option value="">Select</option>';
+        (CITIES[s.value] || []).forEach(function (x) {
+          var o = document.createElement('option'); o.value = x; o.textContent = x; c.appendChild(o);
+        });
+        if (cur) c.value = cur;
+      }
+      (function () {
+        var s = document.getElementById('pf_state');
+        if (s) s.addEventListener('change', function () { fillCities(false); });
+      })();
+
+      var acctBtn = document.getElementById('open-account-btn');
+      if (acctBtn) acctBtn.addEventListener('click', function () { setTimeout(renderAccount, 0); });
+      var ep = document.getElementById('acct-edit-profile');
+      if (ep) ep.addEventListener('click', function () { window.bjOpenEditProfile(); });
+      var epr = document.getElementById('acct-edit-pref');
+      if (epr) epr.addEventListener('click', function () { window.bjOpenEditProfile(); });
+    })();
+    </script>
+
+    <!-- ================= Upgrade / Premium plans ================= -->
+    <div id="bjUpgrade" style="display:none; position:fixed; inset:0; z-index:135; background:#f1f5f9; overflow-y:auto;">
+      <div class="max-w-2xl mx-auto pb-10">
+        <div class="bg-white px-4 py-3 border-b flex items-center gap-3 sticky top-0 z-20">
+          <button id="up-close" class="text-slate-700 hover:text-slate-900 text-lg"><i class="fa-solid fa-arrow-left"></i></button>
+          <h2 class="text-lg font-bold text-slate-800">Upgrade your search</h2>
+        </div>
+        <div class="p-4">
+          <p class="text-sm text-slate-600 mb-3">Choose a plan to unlock more contacts and premium features.</p>
+          <div id="up-plans" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+    (function () {
+      'use strict';
+      window.bjOpenUpgrade = function () {
+        var box = document.getElementById('up-plans');
+        var plans = (typeof planDetails !== 'undefined') ? planDetails : {};
+        var keys = ['Gold', 'Gold Plus', 'Diamond', 'Platinum Plus'];
+        box.innerHTML = keys.map(function (k) {
+          var d = plans[k]; if (!d) return '';
+          var price = (typeof formatVal === 'function') ? formatVal(d.base) : ('Rs ' + d.base);
+          var orig = (typeof formatVal === 'function') ? formatVal(d.orig) : ('Rs ' + d.orig);
+          return '<div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col">' +
+            '<h3 class="text-base font-bold text-slate-800">' + k + '</h3>' +
+            '<p class="text-xs text-slate-500 mb-2">' + d.duration + ' &middot; ' + d.contacts + ' contacts</p>' +
+            '<p class="text-2xl font-extrabold text-rose-600">' + price + ' <span class="text-sm text-slate-400 line-through font-normal">' + orig + '</span></p>' +
+            '<button data-plan="' + k + '" class="mt-3 w-full py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm">Buy ' + k + '</button></div>';
+        }).join('');
+        box.querySelectorAll('[data-plan]').forEach(function (b) {
+          b.addEventListener('click', function () {
+            if (typeof openCheckout === 'function') openCheckout(b.getAttribute('data-plan'));
+          });
+        });
+        var u = document.getElementById('bjUpgrade');
+        u.style.display = 'block'; u.scrollTop = 0; document.body.style.overflow = 'hidden';
+      };
+      document.getElementById('up-close').addEventListener('click', function () {
+        document.getElementById('bjUpgrade').style.display = 'none';
+        document.body.style.overflow = '';
+      });
+    })();
+    </script>
 </body>
 </html>
