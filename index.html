@@ -3159,7 +3159,7 @@
                     <i class="fa-solid fa-heart-crack"></i>
                 </div>
                 <h3 class="text-xl font-bold text-slate-800 mb-1">No More Profiles</h3>
-                <p class="text-slate-500 text-sm mb-6">You've caught up with all available matches. Check your shortlist or start over.</p>
+                <p class="text-slate-500 text-sm mb-6">No profiles to show yet. New members will appear here as they join.</p>
                 <div class="flex gap-3">
                     <button id="reset-btn" class="bg-gradient-to-r from-orange-500 to-rose-500 text-white font-semibold px-5 py-2.5 rounded-full shadow-md hover:opacity-90 transition">
                         Start Over
@@ -3388,62 +3388,33 @@
         };
 
         /* ---------------- Data ---------------- */
-        var profilesData = [
-            {
-                id: 1, name: "A Gupta", age: 46, height: "5' 7\"", location: "Varanasi, UP",
-                caste: "Bania - Ayodhyavasi", profession: "Business - Hotels / Hospitality",
-                income: "Earns ₹25-35 L", education: "B.A", maritalStatus: "Divorced - Have Children",
-                managedBy: "Self", badges: ["Pro Max", "Active Today"], photosCount: 7, verified: true,
-                diet: "Vegetarian", drink: "No", smoke: "No", family: "3 of 5 siblings settled",
-                lastActive: "Active today", about: "Family-oriented businessman from Varanasi. Looking for a caring life partner who values tradition and togetherness.",
-                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop"
-            },
-            {
-                id: 2, name: "Sanjeev S", age: 51, height: "5' 7\"", location: "New Delhi",
-                caste: "Sharma - Brahmin", profession: "Chef / Sommelier / Food Critic",
-                income: "Earns ₹35-50 L", education: "Hotel Management", maritalStatus: "Never Married",
-                managedBy: "Sibling", badges: ["Premium", "2h ago"], photosCount: 4, verified: true,
-                diet: "Non-Vegetarian", drink: "Occasionally", smoke: "No", family: "Parents, 1 elder sister",
-                lastActive: "2 hours ago", about: "A food lover who has spent 20 years in the hospitality world. Seeking a warm companion to share life's flavours with.",
-                image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
-            },
-            {
-                id: 3, name: "Rajesh Kumar", age: 34, height: "5' 10\"", location: "Lucknow, UP",
-                caste: "Kayastha", profession: "Senior Software Engineer",
-                income: "Earns ₹20-25 L", education: "B.Tech (IIT)", maritalStatus: "Never Married",
-                managedBy: "Parents", badges: ["VIP Member", "Online"], photosCount: 9, verified: true,
-                diet: "Vegetarian", drink: "No", smoke: "No", family: "Father retired govt. officer, mother homemaker",
-                lastActive: "Online now", about: "Software engineer who loves cricket, travel and quiet weekends. Looking for someone who is ambitious yet grounded.",
-                image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
-            },
-            {
-                id: 4, name: "Dr. Ananya Roy", age: 31, height: "5' 4\"", location: "Kolkata, WB",
-                caste: "Brahmin - Kulin", profession: "Cardiologist",
-                income: "Earns ₹30-40 L", education: "MD, MBBS", maritalStatus: "Never Married",
-                managedBy: "Self", badges: ["Doctor", "Verified"], photosCount: 5, verified: true,
-                diet: "Non-Vegetarian", drink: "Occasionally", smoke: "No", family: "Academic family from Kolkata",
-                lastActive: "Active today", about: "A cardiologist who balances a demanding career with family, music and Bengali literature. Seeking a kind, understanding partner.",
-                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop"
-            },
-            {
-                id: 5, name: "Meera Nair", age: 28, height: "5' 5\"", location: "Kochi, Kerala",
-                caste: "Nair", profession: "Chartered Accountant",
-                income: "Earns ₹15-20 L", education: "CA, B.Com", maritalStatus: "Never Married",
-                managedBy: "Self", badges: ["New", "Online"], photosCount: 6, verified: true,
-                diet: "Vegetarian", drink: "No", smoke: "No", family: "Father businessman, mother teacher",
-                lastActive: "Online now", about: "A practising CA who enjoys classical dance and cooking. Looking for a supportive partner with a good sense of humour.",
-                image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop"
-            },
-            {
-                id: 6, name: "Vikram Singh", age: 38, height: "5' 11\"", location: "Jaipur, Rajasthan",
-                caste: "Rajput", profession: "Civil Services Officer",
-                income: "Earns ₹18-24 L", education: "M.A, UPSC", maritalStatus: "Never Married",
-                managedBy: "Parents", badges: ["Verified", "1d ago"], photosCount: 3, verified: true,
-                diet: "Vegetarian", drink: "No", smoke: "No", family: "Traditional Rajput family, 2 brothers",
-                lastActive: "Yesterday", about: "A civil servant posted in Jaipur. Values integrity, family and simplicity. Looking for a life partner to build a home with.",
-                image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop"
-            }
-        ];
+        var profilesData = [];
+        function setProfiles(list) {
+            profilesData = (list || []).filter(function (p) { return p && p.name; }).map(function (p) {
+                p.age = p.age || '';
+                return p;
+            });
+            renderStack();
+        }
+        window.bjSetProfiles = setProfiles;
+
+        window.bjLoadProfiles = function () {
+            var base = window.BJ_BACKEND;
+            if (!base) { renderStack(); return; }
+            fetch(base + '/profiles')
+                .then(function (r) { return r.json(); })
+                .then(function (j) {
+                    var meName = '';
+                    try {
+                        var mp = JSON.parse(localStorage.getItem('bj_profile')) || {};
+                        meName = ((mp.firstName || '') + ' ' + (mp.lastName || '')).trim().toLowerCase();
+                    } catch (e) {}
+                    var list = (j && j.profiles) || [];
+                    if (meName) list = list.filter(function (p) { return String(p.name || '').trim().toLowerCase() !== meName; });
+                    setProfiles(list);
+                })
+                .catch(function () { setProfiles([]); });
+        };
 
         // Messages that clients have sent to you
         var clientMessages = [];
@@ -3542,7 +3513,9 @@
 
             card.innerHTML =
                 '<div class="absolute inset-0 z-0">' +
-                    '<img src="' + profile.image + '" alt="' + profile.name + '" class="w-full h-full object-cover object-center pointer-events-none" />' +
+                    (profile.image
+                        ? '<img src="' + profile.image + '" alt="' + profile.name + '" class="w-full h-full object-cover object-center pointer-events-none" />'
+                        : '<div class="w-full h-full flex items-center justify-center bg-slate-700"><i class="fa-solid fa-user text-[110px] text-slate-500"></i></div>') +
                     '<div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20"></div>' +
                 '</div>' +
                 '<div class="stamp stamp-like">Interest</div>' +
@@ -3553,7 +3526,7 @@
                 '</div>' +
                 '<div class="relative z-10 p-4 pt-0 text-white flex flex-col justify-end">' +
                     '<div class="flex items-center gap-2 mb-2 flex-wrap">' + badgesHtml + '</div>' +
-                    '<h2 class="text-2xl font-bold tracking-wide flex items-center gap-2 pointer-events-none"><span>' + profile.name + ', ' + profile.age + '</span>' +
+                    '<h2 class="text-2xl font-bold tracking-wide flex items-center gap-2 pointer-events-none"><span>' + profile.name + (profile.age ? ', ' + profile.age : '') + '</span>' +
                         (profile.verified ? '<i class="fa-solid fa-circle-check text-sky-400 text-lg"></i>' : '') + '</h2>' +
                     '<div class="mt-1.5 text-xs text-slate-200 space-y-1 font-normal opacity-95 pointer-events-none">' +
                         '<p class="truncate">' + profile.height + ' · ' + profile.location + ' · ' + profile.caste + '</p>' +
@@ -3719,10 +3692,12 @@
             var isShort = shortlist.has(profile.id);
             var html =
                 '<div class="relative">' +
-                    '<img src="' + profile.image + '" alt="' + profile.name + '" class="w-full h-64 object-cover" />' +
+                    (profile.image
+                        ? '<img src="' + profile.image + '" alt="' + profile.name + '" class="w-full h-64 object-cover" />'
+                        : '<div class="w-full h-64 flex items-center justify-center bg-slate-700"><i class="fa-solid fa-user text-[90px] text-slate-500"></i></div>') +
                     '<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>' +
                     '<div class="absolute bottom-0 p-4 text-white">' +
-                        '<h2 class="text-2xl font-bold flex items-center gap-2">' + profile.name + ', ' + profile.age +
+                        '<h2 class="text-2xl font-bold flex items-center gap-2">' + profile.name + (profile.age ? ', ' + profile.age : '') +
                             (profile.verified ? '<i class="fa-solid fa-circle-check text-sky-400 text-lg"></i>' : '') + '</h2>' +
                         '<p class="text-sm text-slate-200">' + profile.profession + '</p>' +
                     '</div>' +
@@ -3843,7 +3818,7 @@
                 return '<div class="flex items-center gap-3 px-4 py-3.5 border-b border-slate-100">' +
                     '<img src="' + p.image + '" class="w-12 h-12 rounded-full object-cover flex-shrink-0" alt="">' +
                     '<div class="flex-1 min-w-0">' +
-                        '<p class="font-semibold text-slate-800 truncate">' + p.name + ', ' + p.age + '</p>' +
+                        '<p class="font-semibold text-slate-800 truncate">' + p.name + (p.age ? ', ' + p.age : '') + '</p>' +
                         '<p class="text-xs text-slate-500 truncate">' + p.location + '</p>' +
                     '</div>' +
                     '<button data-sl-chat="' + p.id + '" class="w-9 h-9 rounded-full bg-sky-500 text-white flex items-center justify-center text-sm" title="Chat"><i class="fa-regular fa-comment-dots"></i></button>' +
@@ -4025,7 +4000,7 @@
         document.querySelectorAll('[data-nav]').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var n = btn.getAttribute('data-nav');
-                if (n === 'matches') { closeAllModals(); window.scrollTo(0, 0); }
+                if (n === 'matches') { closeAllModals(); window.scrollTo(0, 0); if (window.bjLoadProfiles) { try { window.bjLoadProfiles(); } catch (e) {} } }
                 else if (n === 'activity') { openMessages(); }
                 else if (n === 'messenger') { openChatView(); }
                 else if (n === 'upgrade') { if (window.bjOpenUpgrade) window.bjOpenUpgrade(); }
@@ -4241,10 +4216,12 @@
           closeForm();
           renderAccount();
           toast('Welcome back!');
+          if (window.bjLoadProfiles) { try { window.bjLoadProfiles(); } catch (e) {} }
           return;
         }
         if (!isComplete(get())) { openForm('Complete Your Profile'); }
         else { saveAccount(get()); renderAccount(); }
+        if (window.bjLoadProfiles) { try { window.bjLoadProfiles(); } catch (e) {} }
       };
 
       function applyPhoto(p) {
