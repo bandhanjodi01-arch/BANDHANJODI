@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BandhanJodi — Accounts Admin</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+</style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+<header class="bg-white border-b border-slate-200 sticky top-0 z-20">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+    <div class="w-9 h-9 rounded-xl bg-rose-600 text-white flex items-center justify-center"><i class="fa-solid fa-user-shield"></i></div>
+    <div>
+      <h1 class="text-lg font-bold leading-none">BandhanJodi — Accounts</h1>
+      <p class="text-[11px] text-slate-500">Admin panel · all registered &amp; logged-in accounts</p>
+    </div>
+    <span id="status" class="ml-auto text-xs font-semibold text-slate-500"></span>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto p-4">
+
+  <!-- connection card -->
+  <section class="bg-white rounded-2xl border border-slate-200 p-4 mb-4">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div class="sm:col-span-2">
+        <label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Server API URL</label>
+        <input id="api" type="text" value="https://bandhanjodi-otp.onrender.com/api" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-rose-400">
+      </div>
+      <div>
+        <label class="block text-[11px] font-bold uppercase tracking-wide text-slate-500 mb-1">Admin key</label>
+        <div class="flex gap-2">
+          <input id="key" type="password" placeholder="ADMIN_KEY" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-rose-400">
+          <button id="load" class="px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-sm whitespace-nowrap">Load</button>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-3">
+      <button id="csv" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold"><i class="fa-solid fa-file-csv mr-1"></i> Download CSV</button>
+      <button id="refresh" class="px-3.5 py-2 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-xs font-bold"><i class="fa-solid fa-rotate mr-1"></i> Refresh</button>
+      <span class="w-px h-6 bg-slate-200 mx-1"></span>
+      <button data-filter="all" class="filt px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white">All</button>
+      <button data-filter="premium" class="filt px-3.5 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 hover:bg-slate-50">Premium</button>
+      <button data-filter="verified" class="filt px-3.5 py-2 rounded-xl text-xs font-bold bg-white border border-slate-300 hover:bg-slate-50">Verified</button>
+      <input id="search" type="text" placeholder="Search name, email, phone, city…" class="flex-1 min-w-[200px] px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-rose-400">
+    </div>
+    <p id="msg" class="text-xs mt-3 hidden"></p>
+  </section>
+
+  <!-- stats -->
+  <section class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+    <div class="bg-white rounded-2xl border border-slate-200 p-3"><p class="text-[11px] text-slate-500 font-semibold uppercase">Total accounts</p><p id="s-total" class="text-2xl font-extrabold">0</p></div>
+    <div class="bg-white rounded-2xl border border-slate-200 p-3"><p class="text-[11px] text-slate-500 font-semibold uppercase">Local</p><p id="s-local" class="text-2xl font-extrabold text-slate-600">0</p></div>
+    <div class="bg-white rounded-2xl border border-slate-200 p-3"><p class="text-[11px] text-slate-500 font-semibold uppercase">Premium</p><p id="s-premium" class="text-2xl font-extrabold text-rose-600">0</p></div>
+    <div class="bg-white rounded-2xl border border-slate-200 p-3"><p class="text-[11px] text-slate-500 font-semibold uppercase">Verified (blue tick)</p><p id="s-verified" class="text-2xl font-extrabold text-sky-600">0</p></div>
+  </section>
+
+  <!-- table -->
+  <section class="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50 text-slate-500 text-[11px] uppercase tracking-wide">
+          <tr>
+            <th class="text-left px-3 py-2.5">Name</th>
+            <th class="text-left px-3 py-2.5">Email</th>
+            <th class="text-left px-3 py-2.5">Phone</th>
+            <th class="text-left px-3 py-2.5">City</th>
+            <th class="text-left px-3 py-2.5">Type</th>
+            <th class="text-left px-3 py-2.5">Plan</th>
+            <th class="text-left px-3 py-2.5">Chat</th>
+            <th class="text-left px-3 py-2.5"></th>
+          </tr>
+        </thead>
+        <tbody id="rows" class="divide-y divide-slate-100"></tbody>
+      </table>
+    </div>
+    <div id="empty" class="text-center py-14 text-slate-400">
+      <i class="fa-regular fa-folder-open text-3xl mb-2"></i>
+      <p class="text-sm">Enter the server URL and admin key, then press <b>Load</b>.</p>
+    </div>
+  </section>
+</main>
+
+<!-- detail drawer -->
+<div id="drawer" class="fixed inset-0 z-40 hidden">
+  <div class="absolute inset-0 bg-black/50" data-close></div>
+  <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl overflow-y-auto">
+    <div class="sticky top-0 bg-white border-b px-4 py-3 flex items-center gap-3">
+      <button data-close class="text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+      <h2 id="d-title" class="font-bold">Account</h2>
+      <button id="d-copy" class="ml-auto text-xs font-semibold text-rose-600"><i class="fa-regular fa-copy"></i> Copy JSON</button>
+    </div>
+    <div id="d-body" class="p-4"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var accounts = [];
+  var filterMode = 'all';
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); };
+
+  function showMsg(text, ok) {
+    var m = $('msg'); m.classList.remove('hidden');
+    m.className = 'text-xs mt-3 ' + (ok ? 'text-green-700' : 'text-rose-600');
+    m.textContent = text;
+  }
+
+  function base() { return $('api').value.trim().replace(/\/+$/, ''); }
+  function key() { return $('key').value.trim(); }
+
+  function load() {
+    var b = base(), k = key();
+    if (!b) { showMsg('Enter the server API URL.', false); return; }
+    if (!k) { showMsg('Enter the admin key.', false); return; }
+    showMsg('Loading…', true);
+    fetch(b + '/admin/accounts?key=' + encodeURIComponent(k))
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, status: r.status, j: j }; }); })
+      .then(function (res) {
+        if (!res.ok) { showMsg((res.j && res.j.message) || ('Error ' + res.status), false); return; }
+        accounts = res.j.accounts || [];
+        try { localStorage.setItem('bj_admin_api', b); localStorage.setItem('bj_admin_key', k); } catch (e) {}
+        showMsg('Loaded ' + accounts.length + ' account(s).', true);
+        render();
+      })
+      .catch(function (e) { showMsg('Could not reach the server: ' + e.message, false); });
+  }
+
+  function stat() {
+    $('s-total').textContent = accounts.length;
+    $('s-local').textContent = accounts.filter(function (a) { return (a.accountType || 'local') !== 'premium'; }).length;
+    $('s-premium').textContent = accounts.filter(function (a) { return a.accountType === 'premium'; }).length;
+    $('s-verified').textContent = accounts.filter(function (a) { return a.verified; }).length;
+  }
+
+  function nameOf(a) { return [a.firstName, a.lastName].filter(Boolean).join(' ') || a._key || '—'; }
+
+  function render() {
+    stat();
+    var q = $('search').value.trim().toLowerCase();
+    var list = accounts.filter(function (a) {
+      if (filterMode === 'premium' && a.accountType !== 'premium') return false;
+      if (filterMode === 'verified' && !a.verified) return false;
+      if (!q) return true;
+      return (nameOf(a) + ' ' + (a.email || '') + ' ' + (a.phone || '') + ' ' + (a.city || '') + ' ' + (a.state || '')).toLowerCase().indexOf(q) !== -1;
+    });
+    var rows = $('rows'), empty = $('empty');
+    if (!accounts.length) { rows.innerHTML = ''; empty.classList.remove('hidden'); empty.innerHTML = '<i class="fa-regular fa-folder-open text-3xl mb-2"></i><p class="text-sm">No accounts saved yet.</p>'; return; }
+    empty.classList.add('hidden');
+    rows.innerHTML = list.map(function (a, i) {
+      var idx = accounts.indexOf(a);
+      var prem = a.accountType === 'premium';
+      return '<tr class="hover:bg-slate-50 cursor-pointer" data-idx="' + idx + '">' +
+        '<td class="px-3 py-2.5 font-semibold text-slate-800">' + esc(nameOf(a)) +
+          (a.verified ? ' <i class="fa-solid fa-circle-check text-sky-500" title="Verified"></i>' : '') + '</td>' +
+        '<td class="px-3 py-2.5 text-slate-600">' + esc(a.email || '—') + '</td>' +
+        '<td class="px-3 py-2.5 text-slate-600">' + esc(a.phone || '—') + '</td>' +
+        '<td class="px-3 py-2.5 text-slate-600">' + esc(a.city || '—') + '</td>' +
+        '<td class="px-3 py-2.5"><span class="text-[11px] font-bold px-2 py-0.5 rounded-full ' + (prem ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-600') + '">' + (prem ? 'Premium' : 'Local') + '</span></td>' +
+        '<td class="px-3 py-2.5 text-slate-600">' + esc(a.plan || '—') + '</td>' +
+        '<td class="px-3 py-2.5"><button data-chat="' + idx + '" class="text-[11px] font-bold px-2 py-1 rounded-full ' + (a.chatUnlocked ? 'bg-green-50 text-green-700' : 'bg-slate-100 text-slate-600') + '">' + (a.chatUnlocked ? 'Unlocked' : 'Locked') + '</button></td>' +
+        '<td class="px-3 py-2.5 text-slate-400"><i class="fa-solid fa-chevron-right text-xs"></i></td>' +
+      '</tr>';
+    }).join('');
+    rows.querySelectorAll('[data-idx]').forEach(function (tr) {
+      tr.addEventListener('click', function () { openDrawer(accounts[parseInt(tr.getAttribute('data-idx'), 10)]); });
+    });
+    rows.querySelectorAll('[data-chat]').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var a = accounts[parseInt(btn.getAttribute('data-chat'), 10)];
+        var want = !a.chatUnlocked;
+        var b = base(), k = key();
+        if (!b || !k) { showMsg('Enter server URL and admin key first.', false); return; }
+        showMsg((want ? 'Unlocking' : 'Locking') + ' chat for ' + nameOf(a) + '…', true);
+        fetch(b + '/admin/unlock-chat?key=' + encodeURIComponent(k), {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: a._key, unlocked: want })
+        }).then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (j && j.ok) { a.chatUnlocked = j.chatUnlocked; showMsg(nameOf(a) + ' — chat ' + (j.chatUnlocked ? 'UNLOCKED' : 'LOCKED'), true); render(); }
+            else showMsg((j && j.message) || 'Could not update.', false);
+          })
+          .catch(function (err) { showMsg('Could not reach the server: ' + err.message, false); });
+      });
+    });
+  }
+
+  function row(label, val) {
+    if (val == null || val === '') return '';
+    return '<div class="flex justify-between gap-3 py-1.5 border-b border-slate-100"><span class="text-slate-500 text-xs">' + esc(label) + '</span><span class="text-slate-800 text-xs font-medium text-right">' + esc(val) + '</span></div>';
+  }
+  function card(title, rows) {
+    var body = rows.join('');
+    if (!body) return '';
+    return '<div class="border border-slate-200 rounded-xl p-3 mb-3"><h3 class="text-xs font-bold text-slate-800 mb-1.5">' + title + '</h3>' + body + '</div>';
+  }
+
+  var current = null;
+  function openDrawer(a) {
+    current = a;
+    $('d-title').innerHTML = esc(nameOf(a)) + (a.verified ? ' <i class="fa-solid fa-circle-check text-sky-500"></i>' : '');
+    var html = '';
+    if (a.photo) html += '<img src="' + a.photo + '" class="w-24 h-24 rounded-full object-cover mx-auto mb-3 border-4 border-slate-100">';
+    html += card('Account', [row('Profile ID', a.id), row('Account type', a.accountType === 'premium' ? 'Premium' : 'Local'), row('Plan', a.plan), row('Verified tick', a.verified ? 'Yes' : 'No'), row('Chat access', a.chatUnlocked ? 'Unlocked' : 'Locked'), row('Login key', a._key)]);
+    html += card('Basic', [row('Name', nameOf(a)), row('Gender', a.gender), row('Date of birth', a.dob), row('Mobile', a.phone), row('Email', a.email), row('Profile for', a.profileFor)]);
+    html += card('Lifestyle', [row('Marital status', a.maritalStatus), row('Height', a.height), row('Diet', a.diet), row('Complexion', a.complexion), row('Ethnicity', a.ethnicity), row('Drinking', a.drink), row('Smoking', a.smoke)]);
+    html += card('Religion & Community', [row('Religion', a.religion), row('Caste / Community', a.community), row('Gotra', a.subCommunity), row('Mother tongue', a.motherTongue)]);
+    html += card('Location', [row('Country', a.country), row('State', a.state), row('City', a.city)]);
+    html += card('Education & Career', [row('Education', a.education), row('Profession', a.profession), row('Income', a.income)]);
+    html += card('Family', [row('Family status', a.familyStatus), row('Father', [a.fatherName, a.fatherOccupation].filter(Boolean).join(' - ')), row('Mother', [a.motherName, a.motherOccupation].filter(Boolean).join(' - ')), row('Brother', a.brotherName), row('Sister', a.sisterName)]);
+    html += card('About', [row('About', a.about)]);
+    html += card('Partner preferences', [row('Marital', a.prefMarital), row('Religion', a.prefReligion), row('Education', a.prefEducation), row('Country', a.prefCountry), row('Drinking', a.prefDrinking), row('Smoking', a.prefSmoking), row('Age', (a.ageFrom && a.ageTo) ? (a.ageFrom + ' - ' + a.ageTo) : '')]);
+    $('d-body').innerHTML = html;
+    $('drawer').classList.remove('hidden');
+  }
+
+  document.querySelectorAll('[data-close]').forEach(function (el) { el.addEventListener('click', function () { $('drawer').classList.add('hidden'); }); });
+  $('d-copy').addEventListener('click', function () {
+    if (!current) return;
+    var t = JSON.stringify(current, null, 2);
+    if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { showMsg('Account JSON copied.', true); });
+    else showMsg(t.slice(0, 200), true);
+  });
+
+  document.querySelectorAll('.filt').forEach(function (b) {
+    b.addEventListener('click', function () {
+      filterMode = b.getAttribute('data-filter');
+      document.querySelectorAll('.filt').forEach(function (x) {
+        var on = x === b;
+        x.className = 'filt px-3.5 py-2 rounded-xl text-xs font-bold ' + (on ? 'bg-slate-900 text-white' : 'bg-white border border-slate-300 hover:bg-slate-50');
+      });
+      render();
+    });
+  });
+
+  // remember the last used URL + key
+  try {
+    if (localStorage.getItem('bj_admin_api')) $('api').value = localStorage.getItem('bj_admin_api');
+    if (localStorage.getItem('bj_admin_key')) $('key').value = localStorage.getItem('bj_admin_key');
+  } catch (e) {}
+
+  $('load').addEventListener('click', load);
+  $('refresh').addEventListener('click', load);
+  $('search').addEventListener('input', render);
+  $('key').addEventListener('keydown', function (e) { if (e.key === 'Enter') load(); });
+  $('csv').addEventListener('click', function () {
+    var b = base(), k = key();
+    if (!b || !k) { showMsg('Enter server URL and admin key first.', false); return; }
+    window.open(b + '/admin/export.csv?key=' + encodeURIComponent(k), '_blank');
+  });
+})();
+</script>
+</body>
+</html>

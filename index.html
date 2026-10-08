@@ -3042,6 +3042,7 @@
           var m = document.getElementById('bjMatchesApp');
           if (m) { m.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
           if (window.bjAfterLogin) { try { window.bjAfterLogin(currentTargetValue); } catch (e) {} }
+          if (window.bjRefreshChatAccess) { try { window.bjRefreshChatAccess(); } catch (e) {} }
         }, 900);
       } else {
         showAlert((data && data.message) || 'Invalid OTP code. Please try again.', 'error');
@@ -3667,8 +3668,13 @@
                 openThread(profile.name, profile.image, 'Hi, I liked your profile. Would you like to connect?');
             };
             if (window.bjIsChatPaid && window.bjIsChatPaid(profile)) { open(); return; }
-            if (window.bjAskChatFee) { window.bjAskChatFee(profile, open); return; }
-            open();
+            if (window.bjChatUnlocked) { open(); return; }
+            var showFee = function () { if (window.bjAskChatFee) window.bjAskChatFee(profile, null); else open(); };
+            if (window.bjRefreshChatAccess) {
+                window.bjRefreshChatAccess(function (unlocked) { if (unlocked) open(); else showFee(); });
+                return;
+            }
+            showFee();
         }
 
         // Card action buttons (delegated)
@@ -4005,7 +4011,7 @@
         document.querySelectorAll('[data-nav]').forEach(function (btn) {
             btn.addEventListener('click', function () {
                 var n = btn.getAttribute('data-nav');
-                if (n === 'matches') { closeAllModals(); window.scrollTo(0, 0); if (window.bjLoadProfiles) { try { window.bjLoadProfiles(); } catch (e) {} } }
+                if (n === 'matches') { closeAllModals(); window.scrollTo(0, 0); if (window.bjLoadProfiles) { try { window.bjLoadProfiles(); } catch (e) {} } if (window.bjRefreshChatAccess) { try { window.bjRefreshChatAccess(); } catch (e) {} } }
                 else if (n === 'activity') { openMessages(); }
                 else if (n === 'messenger') { openChatView(); }
                 else if (n === 'upgrade') { if (window.bjOpenUpgrade) window.bjOpenUpgrade(); }
@@ -4215,6 +4221,10 @@
       window.bjOpenEditProfile = function () { openForm('Edit Profile'); };
       window.bjAfterLogin = function (key) {
         key = (key || '').toLowerCase().trim();
+        if (key) {
+          var p0 = get();
+          if (!p0.email && !p0.phone) { if (key.indexOf('@') !== -1) p0.email = key; else p0.phone = key; set(p0); }
+        }
         var accounts = getAccounts();
         if (key && accounts[key]) {
           set(accounts[key]);
@@ -4358,11 +4368,8 @@
             <div class="flex justify-between mt-1.5"><span class="text-slate-500 font-medium">UPI ID</span><span class="font-bold text-slate-800">9202427388@nyes</span></div>
             <div class="flex justify-between mt-1.5"><span class="text-slate-500 font-medium">Amount</span><span class="font-bold text-rose-600">&#8377;499</span></div>
           </div>
-          <p class="text-[11px] text-slate-500 mt-3"><i class="fa-solid fa-circle-info"></i> Pay &#8377;499 in your UPI app, then tap the button below to open the chat.</p>
-          <button id="fee-paid" class="w-full mt-4 py-3.5 bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white font-extrabold text-sm rounded-xl transition shadow-lg shadow-rose-200 active:scale-95">
-            <i class="fa-solid fa-circle-check"></i> I have paid &#8377;499 — Open Chat
-          </button>
-          <button id="fee-cancel" class="w-full mt-2 py-2.5 text-slate-500 text-xs font-semibold">Cancel</button>
+          <p class="text-[11px] text-slate-500 mt-3"><i class="fa-solid fa-circle-info"></i> Pay &#8377;499 in your UPI app. Your chat will be activated by our team once your payment is confirmed.</p>
+          <button id="fee-cancel" class="w-full mt-4 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-xl">Close</button>
         </div>
       </div>
     </div>
@@ -4377,6 +4384,16 @@
       window.bjMarkChatPaid = function (p) { var a = paid(), k = keyOf(p); if (a.indexOf(k) === -1) { a.push(k); setPaid(a); } };
 
       var pending = null;
+      window.bjChatUnlocked = false;
+      window.bjRefreshChatAccess = function (cb) {
+        var base = window.BJ_BACKEND, key = '';
+        try { var p = JSON.parse(localStorage.getItem('bj_profile')) || {}; key = (p.email || p.phone || '').toLowerCase(); } catch (e) {}
+        if (!base || !key) { window.bjChatUnlocked = false; if (cb) cb(false); return; }
+        fetch(base + '/chat-status?key=' + encodeURIComponent(key))
+          .then(function (r) { return r.json(); })
+          .then(function (j) { window.bjChatUnlocked = !!(j && j.unlocked); if (cb) cb(window.bjChatUnlocked); })
+          .catch(function () { if (cb) cb(window.bjChatUnlocked); });
+      };
       window.bjAskChatFee = function (profile, onPaid) {
         pending = { profile: profile, onPaid: onPaid };
         document.getElementById('fee-name').textContent = (profile && profile.name) || 'this member';
@@ -4389,12 +4406,7 @@
       function closeFee() { document.getElementById('bjChatFee').style.display = 'none'; pending = null; }
       document.getElementById('fee-cancel').addEventListener('click', closeFee);
       document.getElementById('fee-cancel-x').addEventListener('click', closeFee);
-      document.getElementById('fee-paid').addEventListener('click', function () {
-        if (!pending) return;
-        window.bjMarkChatPaid(pending.profile);
-        var cb = pending.onPaid; closeFee();
-        if (cb) cb();
-      });
+
     })();
     </script>
 </body>
