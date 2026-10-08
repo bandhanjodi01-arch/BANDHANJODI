@@ -74,6 +74,7 @@
             <th class="text-left px-3 py-2.5">City</th>
             <th class="text-left px-3 py-2.5">Type</th>
             <th class="text-left px-3 py-2.5">Plan</th>
+            <th class="text-left px-3 py-2.5">Premium</th>
             <th class="text-left px-3 py-2.5">Chat</th>
             <th class="text-left px-3 py-2.5"></th>
           </tr>
@@ -167,12 +168,31 @@
         '<td class="px-3 py-2.5 text-slate-600">' + esc(a.city || '—') + '</td>' +
         '<td class="px-3 py-2.5"><span class="text-[11px] font-bold px-2 py-0.5 rounded-full ' + (prem ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-600') + '">' + (prem ? 'Premium' : 'Local') + '</span></td>' +
         '<td class="px-3 py-2.5 text-slate-600">' + esc(a.plan || '—') + '</td>' +
+        '<td class="px-3 py-2.5"><button data-prem="' + idx + '" class="text-[11px] font-bold px-2 py-1 rounded-full ' + (a.accountType === 'premium' ? 'bg-rose-50 text-rose-700' : 'bg-slate-100 text-slate-600') + '">' + (a.accountType === 'premium' ? 'Premium' : 'Local') + '</button></td>' +
         '<td class="px-3 py-2.5"><button data-chat="' + idx + '" class="text-[11px] font-bold px-2 py-1 rounded-full ' + (a.chatUnlocked ? 'bg-green-50 text-green-700' : 'bg-slate-100 text-slate-600') + '">' + (a.chatUnlocked ? 'Unlocked' : 'Locked') + '</button></td>' +
         '<td class="px-3 py-2.5 text-slate-400"><i class="fa-solid fa-chevron-right text-xs"></i></td>' +
       '</tr>';
     }).join('');
     rows.querySelectorAll('[data-idx]').forEach(function (tr) {
       tr.addEventListener('click', function () { openDrawer(accounts[parseInt(tr.getAttribute('data-idx'), 10)]); });
+    });
+    rows.querySelectorAll('[data-prem]').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var a = accounts[parseInt(btn.getAttribute('data-prem'), 10)];
+        var want = a.accountType !== 'premium';
+        var b = base(), k = key();
+        if (!b || !k) { showMsg('Enter server URL and admin key first.', false); return; }
+        fetch(b + '/admin/set-premium?key=' + encodeURIComponent(k), {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ key: a._key, premium: want })
+        }).then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (j && j.ok) { a.accountType = j.accountType; a.verified = j.verified; showMsg(nameOf(a) + ' — ' + (want ? 'PREMIUM activated' : 'set to Local'), true); render(); }
+            else showMsg((j && j.message) || 'Could not update.', false);
+          })
+          .catch(function (err) { showMsg('Could not reach the server: ' + err.message, false); });
+      });
     });
     rows.querySelectorAll('[data-chat]').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
